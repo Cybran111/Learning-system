@@ -1,13 +1,11 @@
 from course.models import Course
+from functional_tests.base import FunctionalTest
 
-__author__ = 'cybran'
 
-from selenium import webdriver
-from django.test import LiveServerTestCase
+class NewVisitorTest(FunctionalTest):
 
-class NewVisitorTest(LiveServerTestCase):
+
     def setUp(self):
-
         course_data = (
             {"title": "Introduction to Python", "short_description": "Lets learn Python!"},
             {"title": "Introduction to TDD", "short_description": "New methodology. New problem"},
@@ -16,14 +14,7 @@ class NewVisitorTest(LiveServerTestCase):
         for course in course_data:
             Course.objects.create(title=course["title"], short_description=course["short_description"])
 
-
-
-        self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(5)
-
-    def tearDown(self):
-        self.browser.quit()
-        # pass
+        super(NewVisitorTest, self).setUp()
 
     def test_can_look_at_course_list(self):
         # Alice has heard about a cool new course platform.
@@ -34,11 +25,6 @@ class NewVisitorTest(LiveServerTestCase):
         # She notices the course list with title and short description of every course
         _list = self.browser.find_element_by_class_name('list-group')
         courses = _list.find_elements_by_class_name("list-group-item")
-        # < img
-        # src = "smiley.gif"
-        # alt = "Smiley face"
-        # height = "42"
-        # width = "42" >
 
         self.assertIn("Introduction to Python", courses[0].find_element_by_tag_name("h4").text)
         self.assertIn("Lets learn Python!", courses[0].find_element_by_tag_name("h5").text)
