@@ -31,9 +31,15 @@ class NewVisitorTest(LiveServerTestCase):
 
         self.browser.get(self.live_server_url)
 
-        # She notices the course list with title and description of every course
+        # She notices the course list with title and short description of every course
         _list = self.browser.find_element_by_class_name('list-group')
         courses = _list.find_elements_by_class_name("list-group-item")
+        # < img
+        # src = "smiley.gif"
+        # alt = "Smiley face"
+        # height = "42"
+        # width = "42" >
+
         self.assertIn("Introduction to Python", courses[0].find_element_by_tag_name("h4").text)
         self.assertIn("Lets learn Python!", courses[0].find_element_by_tag_name("h5").text)
 

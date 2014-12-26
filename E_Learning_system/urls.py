@@ -1,6 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+# urlpatterns = patterns('',
+#     # ... the rest of your URLconf goes here ...
+# ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'E_Learning_system.views.home', name='home'),
@@ -8,4 +16,4 @@ urlpatterns = patterns('',
     url(r'^$', 'course.views.home_page', name='home'),
     url(r'^courses/', include('course.urls', namespace='courses')),
     # url(r'^admin/', include(admin.site.urls)),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
