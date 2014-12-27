@@ -1,4 +1,4 @@
-from course.models import Course
+from courses.models import Course
 
 __author__ = 'cybran'
 

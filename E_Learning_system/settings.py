@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'course',
+    'courses',
     'dashboard',
 )
 
@@ -94,7 +94,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'course', 'static'),
+    os.path.join(BASE_DIR, 'courses', 'static'),
 )
 
 TEMPLATE_DIRS = (

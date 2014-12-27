@@ -20,29 +20,17 @@
 </head>
 <body>
 <div class="container">
-    <div class="jumbotron">
-        <h1>Welcome to E-Learning System!</h1>
-        <p> We have a lot of interesting courses</p>
+    <form id="new_course_form" method="post">
+        {{ form.non_field_errors }}
 
-        <p>
-            <a class="btn btn-primary btn-lg btn-info" href="#" role="button">Sign in</a>
-            <a class="btn btn-primary btn-lg" href="{% url "dashboard:register" %}" role="button">Sign up</a>
-        </p>
+        <div class="form-group">
 
+        {{ new_course_form }}
 
-    </div>
-
-    <div class="list-group">
-        {% for course in courses %}
-            <a href="courses/{{ course.id }}" class="list-group-item">
-             <img src="media/course/{{ course.id }}.png" class="img-rounded" height="50" width="50">
-                <h4>{{ course.title }}</h4>
-                <h5>{{ course.short_description }}</h5>
-            </a>
-        {% endfor %}
-        <a href=" {% url "courses:new_course" %}" id="new-course" class="list-group-item btn btn-info">...or you wish to create a new one?</a>
-    </div>
-
+        {% csrf_token %}
+        <button type="submit" id="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
