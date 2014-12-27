@@ -1,3 +1,4 @@
+import time
 from courses.models import Course
 from functional_tests.base import FunctionalTest
 
@@ -7,6 +8,12 @@ class NewTeacherTest(FunctionalTest):
         # Olga heard about a new cool course platform
         # And she decided to invest a new course for that platform
 
+        # Olga heard about a new cool course platform
+        course = {'title': ("title", "My little course"),
+                  'short_desc': ("short description", "Do you wanna ponies?"),
+                  'full_desc': ("full description", "Friendship is Magic")
+        }
+
         # She goes to the site...
         self.browser.get(self.live_server_url)
 
@@ -14,32 +21,38 @@ class NewTeacherTest(FunctionalTest):
         create_course = self.browser.find_element_by_id('new-course')
         create_course.click()
 
-        # Now she is on the "Create a new course"
+
+
+        # Now she is on the "Create a new course" page
         # She fills the details of her new course
-        self.check_and_enter_to_form_element('title', 'title', 'My little course')
-        self.check_and_enter_to_form_element('short_desc',
-                                             'short description',
-                                             'Do you wanna ponies?')
-        self.check_and_enter_to_form_element('full_desc',
-                                             'full description',
-                                             "Friendship is Magic", el_view='textarea')
+
+        for key, value in course.iteritems():
+            self.check_and_enter_to_form_element(key, *value)
 
         # Then she presses the "Submit" button...
         submit = self.browser.find_element_by_id('submit')
         submit.click()
 
         # And now she is on the page of the course and she sees all her inputs on the page
+        title = self.browser.find_element_by_tag_name("h2")
+        short_desc = self.browser.find_element_by_tag_name("h3")
+        full_desc = self.browser.find_element_by_id("full-desc")
 
+        elements = (title, short_desc, full_desc)
+
+        for element, field in zip(reversed(elements), course.itervalues()):
+            ## DO NOT forget that the value is in the 1st position, in the 0th position is full name of the field
+            self.assertEqual(element.text, field[1])
 
         # And she checks that her course is available on the homepage
         self.browser.get(self.live_server_url)
 
         courses = self.browser.find_elements_by_class_name('list-group-item')
-        self.assertIn("My little course", (course.find_element_by_tag_name('h4').text for course in courses))
-        self.assertIn("Do you wanna ponies?", (course.find_element_by_tag_name('h5').text for course in courses))
+        self.assertIn(course['title'][1], (_course.find_element_by_tag_name('h4').text for _course in courses))
+        self.assertIn(course['short_desc'][1], (_course.find_element_by_tag_name('h5').text for _course in courses))
 
-    def check_and_enter_to_form_element(self, el_name, placeholder, text, el_view='input'):
-        el = self.browser.find_element_by_css_selector('%s[name=%s]' % (el_view, el_name))
+    def check_and_enter_to_form_element(self, el_name, placeholder, text):
+        el = self.browser.find_element_by_css_selector('[name=%s]' % (el_name))
 
         self.assertEqual(
             el.get_attribute('placeholder'),
@@ -50,12 +63,12 @@ class NewTeacherTest(FunctionalTest):
 
 class NewStudentTest(FunctionalTest):
     def setUp(self):
-        course_data = (
+        self.course_data = (
             {"title": "Introduction to Python", "short_description": "Lets learn Python!"},
             {"title": "Introduction to TDD", "short_description": "New methodology. New problem"},
         )
 
-        for course in course_data:
+        for course in self.course_data:
             Course.objects.create(title=course["title"], short_description=course["short_description"])
 
         super(NewStudentTest, self).setUp()
@@ -70,11 +83,10 @@ class NewStudentTest(FunctionalTest):
         _list = self.browser.find_element_by_class_name('list-group')
         courses = _list.find_elements_by_class_name("list-group-item")
 
-        self.assertIn("Introduction to Python", courses[0].find_element_by_tag_name("h4").text)
-        self.assertIn("Lets learn Python!", courses[0].find_element_by_tag_name("h5").text)
-
-        self.assertIn("Introduction to TDD", courses[1].find_element_by_tag_name("h4").text)
-        self.assertIn("New methodology. New problem", courses[1].find_element_by_tag_name("h5").text)
+        for data, course in zip(self.course_data, courses):
+            for field, el in zip(data.itervalues(), ("h5", "h4")):
+                self.assertIn(field, course.find_element_by_tag_name(el).text)
+        # self.assertIn("New methodology. New problem", courses[1].find_element_by_tag_name("h5").text)
 
     def test_can_go_to_course_page(self):
         ## Alice wanna to look at course and enroll to it
