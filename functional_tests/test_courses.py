@@ -28,6 +28,9 @@ class NewTeacherTest(FunctionalTest):
         submit = self.browser.find_element_by_id('submit')
         submit.click()
 
+        # And now she is on the page of the course and she sees all her inputs on the page
+
+
         # And she checks that her course is available on the homepage
         self.browser.get(self.live_server_url)
 
