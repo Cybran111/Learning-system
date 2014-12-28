@@ -1,5 +1,7 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
+
 from courses import views
+
 
 __author__ = 'cybran'
 

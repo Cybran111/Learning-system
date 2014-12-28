@@ -1,17 +1,19 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
+
 from courses.forms import NewCourseForm
 from courses.models import Course
+
 
 # Create your views here.
 
 def home_page(request):
-
     return render(request, 'homepage.html', {"courses": Course.objects.all()})
 
-def course_view(request, course_id):
 
+def course_view(request, course_id):
     return render(request, 'course_page.html', {"course": Course.objects.get(pk=course_id)})
+
 
 def create_course(request):
     if request.method == 'POST':

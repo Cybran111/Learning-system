@@ -1,9 +1,13 @@
+from django.core.exceptions import ValidationError
+
 from django.template.loader import render_to_string
+
 from django.test import TestCase
 from django.core.urlresolvers import resolve, reverse
 
 from courses.views import home_page
-from courses.models import Course
+
+from courses.models import Course, Week, Lecture
 
 
 # Create your tests here.
@@ -58,3 +62,44 @@ class SaveCourseTest(TestCase):
         self.assertEqual(new_course.short_description, 'A tiny course')
         self.assertEqual(new_course.full_description, 'A REALLY tiny course')
 
+class ModelsTest(TestCase):
+    def test_course_can_holds_weeks_and_lectures(self):
+        course = Course()
+        course.title = "A little title"
+        course.save()
+
+        week = Week()
+        week.course = course
+        week.number = 1
+        week.save()
+
+        lecture = Lecture()
+        lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
+        lecture.week = week
+        lecture.save()
+
+        self.assertEqual(week, Week.objects.get(course=course))
+        self.assertEqual(lecture, Lecture.objects.get(week=week))
+
+    def test_lecture_cant_have_not_youtube_url(self):
+
+        course = Course()
+        course.title = "Yet another title"
+        course.save()
+
+        week = Week()
+        week.number = 1
+        week.course = course
+        week.save()
+
+        lecture = Lecture()
+        lecture.week = week
+
+        lecture.video_url = "http://habrahabr.ru"
+        self.assertRaises(ValidationError, lecture.full_clean)
+
+        lecture.video_url = "https://www.google.com.ua/"
+        self.assertRaises(ValidationError, lecture.full_clean)
+
+        lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
+        lecture.full_clean()
