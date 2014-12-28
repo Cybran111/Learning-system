@@ -1,13 +1,13 @@
-from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
-from django.core.urlresolvers import resolve
-from courses.views import home_page, course_view
+from django.core.urlresolvers import resolve, reverse
+
+from courses.views import home_page
 from courses.models import Course
+
 
 # Create your tests here.
 class CourseListTest(TestCase):
-
     def setUp(self):
         course_data = (
             {"title": "Introduction to Python", "short_description": "Lets learn Python!"},
@@ -36,13 +36,21 @@ class CourseListTest(TestCase):
 
 
 class SaveCourseTest(TestCase):
+    def setUp(self):
+        self.course_data = {'title': 'My course', 'short_desc': 'A tiny course', 'full_desc': "A REALLY tiny course"}
+
+    def test_redirect_to_coursepage_when_created(self):
+        response = self.client.post(
+            '/courses/new',
+            data=self.course_data
+        )
+        self.assertRedirects(response, reverse('courses:course_page', args=(1,)))
+
+
     def test_can_save_new_course(self):
         self.client.post(
             '/courses/new',
-            data={'title': 'My course',
-                  'short_desc': 'A tiny course',
-                  'full_desc': "A REALLY tiny course"
-            }
+            data=self.course_data,
         )
         self.assertEqual(Course.objects.count(), 1)
         new_course = Course.objects.first()

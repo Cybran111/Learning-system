@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from courses.forms import NewCourseForm
 from courses.models import Course
@@ -21,7 +22,7 @@ def create_course(request):
             new_course.short_description = request.POST['short_desc']
             new_course.full_description = request.POST['full_desc']
             new_course.save()
-            return redirect('courses/%d' % (new_course.id,))
+            return redirect(reverse('courses:course_page', args=(new_course.id,)))
     else:
         form = NewCourseForm()
 
