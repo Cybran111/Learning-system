@@ -13,7 +13,8 @@ urlpatterns = patterns('',
 
                        # url(r'^(?P<question_id>\d+)/$', views.detail, name='detail'),
                        url(r'(?P<course_id>\d+)/$', views.course_view, name='course_page'),
-                       url(r'^new$', views.create_course, name='new_course'),
+                       url(r'(?P<course_id>\d+)/lectures/$', views.lectures_view, name='course_lectures'),
+                       url(r'^new$', views.create_course_view, name='new_course'),
 
                        # url(r'^admin/', include(admin.site.urls)),
 )

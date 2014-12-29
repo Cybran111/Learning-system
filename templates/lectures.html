@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} {{ course.title }} - E-Learning System {% endblock %}
+
+{% block content %}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        {% for week in lectures_by_week %}
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapse{{ forloop.counter }}" aria-expanded="false"
+                           aria-controls="collapse{{ forloop.counter }}">
+                            Week {{ forloop.counter }}
+
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading{{ forloop.counter }}">
+                    <div class="panel-body">
+
+                        <div class="list-group">
+                            {% for lecture  in week %}
+
+                                <a href="#" class="list-group-item">
+                                    {{ lecture.video_url }}
+                                </a>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+    </div>
+{% endblock %}
