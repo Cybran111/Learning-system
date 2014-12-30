@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.test import TestCase
 from django.core.urlresolvers import resolve
+from django.utils.html import escape
 
 from courses.views import home_page
 from courses.models import Course, Week, Lecture
@@ -11,52 +12,7 @@ from courses.models import Course, Week, Lecture
 
 # Create your tests here.
 class CourseListTest(TestCase):
-    def setUp(self):
-        course_data = (
-            {
-                "title": "Introduction to Python",
-                "short_description": "Lets learn Python!",
-                "full_description": "Some description",
-                # lectures by week
-                'lectures': (
-                    (
-                        "https://www.youtube.com/watch?v=T3l0Co9bHJg",
-                        "https://www.youtube.com/watch?v=vYP4KqpsvFs"
-                    ),
-                    (
-                        "https://www.youtube.com/watch?v=sm0QQO-WZlM",
-                        "https://www.youtube.com/watch?v=2lWYkj_EQw0"
-                    )
-                ),
-            },
-            {
-                "title": "Introduction to TDD",
-                "short_description": "New methodology. New problem",
-                "full_description": "Yet another full description",
-                'lectures': (
-
-                    (
-                        "https://www.youtube.com/watch?v=sm0QQO-WZlM",
-                        "https://www.youtube.com/watch?v=2lWYkj_EQw0"
-                    ),
-                    (
-                        "https://www.youtube.com/watch?v=T3l0Co9bHJg",
-                        "https://www.youtube.com/watch?v=vYP4KqpsvFs"
-                    )
-                ),
-            },
-        )
-
-        for course in course_data:
-            current_course = Course.objects.create(title=course["title"],
-                                                   short_description=course["short_description"],
-                                                   full_description=course["full_description"])
-
-            for number, week in enumerate(course["lectures"]):
-                current_week = Week.objects.create(number=number, course=current_course)
-
-                for lecture_url in week:
-                    Lecture.objects.create(video_url=lecture_url, week=current_week)
+    fixtures = ['tests_data.json']
 
     def test_homepage_resolves_to_homepage_view(self):
         found = resolve('/')
@@ -82,9 +38,10 @@ class CourseListTest(TestCase):
     def test_can_get_course_page(self):
         course = Course.objects.get(pk=1)
         response = self.client.get('/courses/%s/' % (course.id))
-        self.assertContains(response, course.title)
-        self.assertContains(response, course.short_description)
-        self.assertContains(response, course.full_description)
+
+        self.assertContains(response, escape(course.title))
+        self.assertContains(response, escape(course.short_description))
+        self.assertContains(response, escape(course.full_description))
 
 
 class SaveCourseTest(TestCase):

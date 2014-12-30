@@ -1,16 +1,8 @@
-from courses.models import Course
+from unittest import skip
 from functional_tests.base import FunctionalTest
 
 
 class NewTeacherTest(FunctionalTest):
-    def setUp(self):
-
-        self.course = {'title': ("title", "My little course"),
-                       'short_desc': ("short description", "Do you wanna ponies?"),
-                       'full_desc': ("full description", "Friendship is Magic")
-        }
-
-        super(NewTeacherTest, self).setUp()
 
     def test_can_create_new_course(self):
         # Olga heard about a new cool course platform
@@ -28,7 +20,12 @@ class NewTeacherTest(FunctionalTest):
         # Now she is on the "Create a new course" page
         # She fills the details of her new course
 
-        for key, value in self.course.iteritems():
+        course = {'title': ("title", "My little course"),
+                  'short_desc': ("short description", "Do you wanna ponies?"),
+                  'full_desc': ("full description", "Friendship is Magic")
+        }
+
+        for key, value in course.iteritems():
             self.check_and_enter_to_form_element(key, *value)
 
         # Then she presses the "Submit" button...
@@ -42,7 +39,7 @@ class NewTeacherTest(FunctionalTest):
 
         elements = (title, short_desc, full_desc)
 
-        for element, field in zip(reversed(elements), self.course.itervalues()):
+        for element, field in zip(reversed(elements), course.itervalues()):
             ## DO NOT forget that the value is in the 1st position, in the 0th position is full name of the field
             self.assertEqual(element.text, field[1])
 
@@ -50,11 +47,12 @@ class NewTeacherTest(FunctionalTest):
         self.browser.get(self.live_server_url)
 
         courses = self.browser.find_elements_by_class_name('list-group-item')
-        self.assertIn(self.course['title'][1], (_course.find_element_by_tag_name('h4').text
+        self.assertIn(course['title'][1], (_course.find_element_by_tag_name('h4').text
+                                           for _course in courses))
+        self.assertIn(course['short_desc'][1], (_course.find_element_by_tag_name('h5').text
                                                 for _course in courses))
-        self.assertIn(self.course['short_desc'][1], (_course.find_element_by_tag_name('h5').text
-                                                     for _course in courses))
 
+    @skip("For removing")
     def test_can_add_new_lectures(self):
         # Olga wanna add some video lectures to her course
 
@@ -67,7 +65,13 @@ class NewTeacherTest(FunctionalTest):
         # Now she is on the "Create a new course" page
         # She fills the details of her new course
 
-        for key, value in self.course.iteritems():
+        course = {'title': ("title", "My little course"),
+                  'short_desc': ("short description", "Do you wanna ponies?"),
+                  'full_desc': ("full description", "Friendship is Magic")
+        }
+
+
+        for key, value in course.iteritems():
             self.check_and_enter_to_form_element(key, *value)
 
         # Then she presses the "Submit" button and she is on the page of her course
@@ -75,7 +79,7 @@ class NewTeacherTest(FunctionalTest):
         submit.click()
 
         # Now she clicks on the "Add a lecture"...
-        new_lecture = self.browser.find_element_by_id("new-lecture")
+        new_lecture = self.browser.find_element_by_id("manage-course")
         new_lecture.click()
 
         self.fail('Finish the test')
@@ -91,47 +95,7 @@ class NewTeacherTest(FunctionalTest):
 
 
 class NewStudentTest(FunctionalTest):
-    def setUp(self):
-        self.course_data = (
-            {"title": "Introduction to Python",
-             "short_description": "Lets learn Python!",
-             'full_description': "Some expanded description",
-             "weeks": (
-                 (('Introduction to the Course'), ("Object-oriented programming. part 1")),
-                 (('Object-oriented programming. part 2'),),
-             )
-            },
-            {"title": "Introduction to TDD",
-             "short_description": "New methodology. New problem",
-             "full_description": "Yet another full description",
-             "weeks": (
-                 (('Introduction to the Course'), ("Red-green-refactor")),
-                 (('No code without a test'), ('Slow developing process, but effective in long range')),
-             )
-            },
-        )
-
-        for course in self.course_data:
-            Course.objects.create(title=course["title"],
-                                  short_description=course["short_description"],
-                                  full_description=course['full_description'])
-
-        super(NewStudentTest, self).setUp()
-
-    def test_can_look_at_course_list(self):
-        # Alice has heard about a new cool course platform.
-        # She goes to check out its homepage
-
-        self.browser.get(self.live_server_url)
-
-        # She notices the course list with title and short description of every course
-        _list = self.browser.find_element_by_class_name('list-group')
-        courses = _list.find_elements_by_class_name("list-group-item")
-
-        # time.sleep(60)
-        for data, course in zip(self.course_data, courses):
-            self.assertIn(data["title"], course.find_element_by_tag_name("h4").text)
-            self.assertIn(data["short_description"], course.find_element_by_tag_name("h5").text)
+    fixtures = ["courses/fixtures/tests_data.json"]
 
     def test_can_go_to_course_page(self):
         ## Alice wanna to look at course
@@ -144,20 +108,15 @@ class NewStudentTest(FunctionalTest):
         course = _list.find_element_by_class_name('list-group-item')
         course_title = course.find_element_by_tag_name("h4").text
         course_short_description = course.find_element_by_tag_name("h5").text
-
         course.click()
 
-        # Find the correct full desc of the course
-        course_full_description = tuple(course for course in self.course_data if course['title'] == course_title)[0][
-            'full_description']
-
-        ## And she is at the course page
+        # And she is at the course page with nice full description
         self.assertEqual(self.browser.title, course_title + " - E-Learning System")
         self.assertIn(course_title, self.browser.page_source)
         self.assertIn(course_short_description, self.browser.page_source)
-        self.assertIn(course_full_description, self.browser.page_source)
+        self.assertIsNotNone(self.browser.find_element_by_id("full-desc"))
 
-
+    @skip("For removing")
     def test_can_browse_lectures_by_the_week(self):
         # Alice wanna see the course topics and lectures
 
@@ -170,21 +129,13 @@ class NewStudentTest(FunctionalTest):
         _list.find_element_by_class_name("list-group-item").click()
 
         # ...she finds the element that redirects her to the course lecture list...
-        self.browser.find_element_by_id('lecture_page').click()
+        self.browser.find_element_by_id('lecture-page').click()
 
 
-        # She sees that page has a week list with nested lecture lists on every week
-        week_list = self.browser.find_element_by_id("weeks-list")
-        weeks = week_list.find_elements_by_class_name("list-group-item")
-        for week_number, week in enumerate(weeks):
-            self.assertEqual("Week %d" % (week_number), week.text)
+        # She sees that page has a week list with  lecture lists on every week
+        weeks = self.browser.find_elements_by_class_name("panel")
 
-            lecture_list = week.find_element_by_class_name("lecture-list")
-            lectures = lecture_list.find_elements_by_class_name('list-group-item')
 
-            for lecture_number, lecture in enumerate(lectures):
-                self.assertEqual("%d: %s" % (lecture_number, self.course_data['weeks'][week_number][lecture_number]),
-                                 lecture.text)
 
 
 
