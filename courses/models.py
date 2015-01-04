@@ -15,6 +15,7 @@ class Week(models.Model):
 
 
 class Lecture(models.Model):
+    title = models.TextField()
     video_url = models.URLField(
-        validators=[RegexValidator(r"^https?:\/\/(www\.)?youtube\.com\/watch\S+$", "It is nor from Youtube")])
+        validators=[RegexValidator(r"^https?:\/\/(www\.)?youtube\.com\/watch\S+$", "It is not from Youtube")])
     week = models.ForeignKey("Week")

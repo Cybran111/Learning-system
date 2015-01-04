@@ -1,47 +1,82 @@
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.test import TestCase
-from django.core.urlresolvers import resolve
 from django.utils.html import escape
 
-from courses.views import home_page
 from courses.models import Course, Week, Lecture
 
 
+PK = 1
 
 
-# Create your tests here.
-class CourseListTest(TestCase):
+class CourseTest(TestCase):
     fixtures = ['tests_data.json']
 
-    def test_homepage_resolves_to_homepage_view(self):
-        found = resolve('/')
-        self.assertEqual(found.func, home_page)
 
+class CRUDTest(CourseTest):
+    def test_can_get_course_lectures_page(self):
+        response = self.client.get('/courses/%s/lectures/' % PK)
+        course = Course.objects.get(pk=PK)
+
+        lectures = self.get_lectures(course)
+
+        for lecture in lectures:
+            self.assertContains(response, lecture.video_url)
+
+    def test_can_get_manage_page(self):
+        course = Course.objects.get(pk=PK)
+        response = self.client.get('/courses/%s/manage/' % (course.id))
+
+        for lecture in self.get_lectures(course):
+            self.assertContains(response, lecture.title)
+
+    def test_can_add_week(self):
+        course = Course.objects.get(pk=PK)
+        weeks_count = self.get_weeks_count(course)
+        response = self.client.post('/courses/%s/manage/week/' % (course.id))
+
+        self.assertRedirects(response, "/courses/%s/manage/" % (course.id))
+        self.assertNotEqual(weeks_count, self.get_weeks_count(course))
+
+    def test_can_add_lecture(self):
+        course = Course.objects.get(pk=PK)
+        week = Week.objects.filter(course=course)[0]
+        lectures_count = self.get_lectures_count(week)
+        response = self.client.post('/courses/%s/manage/week/%s/' % (course.id, week.number),
+                                    {
+                                        "title": "My little lecture",
+                                        "video_url": "https://www.youtube.com/watch?v=sm0QQO-WZlM",
+                                    })
+        self.assertRedirects(response, "/courses/%s/manage/" % (course.id))
+        self.assertNotEqual(lectures_count, self.get_lectures_count(week))
+
+    def test_can_get_course_page(self):
+        course = Course.objects.get(pk=PK)
+        response = self.client.get('/courses/%s/' % (course.id))
+
+        self.assertContains(response, escape(course.title))
+        self.assertContains(response, escape(course.short_description))
+        self.assertContains(response, escape(course.full_description))
+
+    def get_weeks_count(self, course):
+        return Week.objects.filter(course=course).count()
+
+    def get_lectures_count(self, week):
+        return Lecture.objects.filter(week=week).count()
+
+    def get_lectures(self, course):
+        lectures = (lecture for week in Week.objects.filter(course=course)
+                    for lecture in Lecture.objects.filter(week=week))
+        return lectures
+
+
+class ListTest(CourseTest):
     def test_homepage_returns_correct_page_with_list(self):
         response = self.client.get('/')
         courses = Course.objects.all()
         expected_html = render_to_string('homepage.html', {"courses": courses})
         self.assertEqual(response.content.decode(), expected_html)
 
-    def test_can_get_course_lectures_page(self):
-        response = self.client.get('/courses/1/lectures/')
-        course = Course.objects.get(pk=1)
-
-        lectures = (lecture for week in Week.objects.filter(course=course)
-                    for lecture in Lecture.objects.filter(week=week))
-
-        for lecture in lectures:
-            self.assertContains(response, lecture.video_url)
-
-
-    def test_can_get_course_page(self):
-        course = Course.objects.get(pk=1)
-        response = self.client.get('/courses/%s/' % (course.id))
-
-        self.assertContains(response, escape(course.title))
-        self.assertContains(response, escape(course.short_description))
-        self.assertContains(response, escape(course.full_description))
 
 
 class SaveCourseTest(TestCase):
@@ -80,6 +115,7 @@ class ModelsTest(TestCase):
         week.save()
 
         lecture = Lecture()
+        lecture.title = "My lecture"
         lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
         lecture.week = week
         lecture.save()
@@ -98,6 +134,7 @@ class ModelsTest(TestCase):
         week.save()
 
         lecture = Lecture()
+        lecture.title = "My lecture"
         lecture.week = week
 
         lecture.video_url = "http://habrahabr.ru"
