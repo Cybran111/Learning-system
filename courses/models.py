@@ -19,7 +19,7 @@ class Week(models.Model):
 
 class Lecture(models.Model):
     order_id = models.IntegerField()
-    title = models.TextField()
+    title = models.CharField(max_length=80)
     video_url = models.URLField(
         validators=[RegexValidator(r"^https?:\/\/(www\.)?youtube\.com\/watch\?v\=\S{11}$", "It is not from Youtube")])
     embed_video_url = models.URLField(

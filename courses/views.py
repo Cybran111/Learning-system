@@ -1,9 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_http_methods, require_POST
+from django.views.decorators.http import require_POST
 
-from courses.forms import NewCourseForm
+from courses.forms import NewCourseForm, NewLectureForm
 from courses.models import Course, Week, Lecture
+
+
+
 
 
 # Create your views here.
@@ -59,22 +62,48 @@ def manage_week_view(request, course_id):
     return redirect("courses:manage_course", course_id=course.id)
 
 
-@require_http_methods(["POST"])
+# @require_http_methods(["POST"])
 def manage_lecture_view(request, course_id, week_number):
-    course = Course.objects.get(pk=course_id)
-    week = Week.objects.get(course=course, number=week_number)
+    if request.method == 'POST':  # If the form has been submitted...
 
-    video_url = request.POST["video_url"]
-    Lecture.objects.create(week=week,
-                           order_id=Lecture.objects.filter(week=week).count() + 1,
-                           title=request.POST["title"],
-                           video_url=video_url,
-                           # Form validation guarantees that the video_url is already secure
-                           # (but still there is a validation on the Model level)
-                           # So we can just splitting the URL string
-                           embed_video_url="https://www.youtube.com/embed/" + video_url[-11:])
+        form = NewLectureForm(request.POST)
 
-    return redirect("courses:manage_course", course_id=course.id)
+        if form.is_valid():  # All validation rules pass
+            # NOTE: Monkeycode?
+            course = Course.objects.get(pk=course_id)
+            week = Week.objects.get(course=course, number=week_number)
+
+            new_lecture = form.save(commit=False)
+
+            new_lecture.week = week
+            new_lecture.order_id = Lecture.objects.filter(week=week).count() + 1
+            new_lecture.embed_video_url = "https://www.youtube.com/embed/" + new_lecture.video_url[-11:]
+
+            new_lecture.save()
+            return redirect("courses:manage_course", course_id=course.id)
+
+    else:
+        form = NewLectureForm()  # An unbound form
+
+    return render(request, 'new_lecture.html', {
+        'form': form,
+    })
+
+
+# course = Course.objects.get(pk=course_id)
+# week = Week.objects.get(course=course, number=week_number)
+#
+# video_url = request.POST["video_url"]
+# Lecture.objects.create(week=week,
+# order_id=Lecture.objects.filter(week=week).count() + 1,
+# title=request.POST["title"],
+# video_url=video_url,
+# # Form validation guarantees that the video_url is already secure
+#                        # (but still there is a validation on the Model level)
+#                        # So we can just splitting the URL string
+#                        embed_video_url="https://www.youtube.com/embed/" + video_url[-11:])
+#
+#
 
 
 def get_lectures(course):

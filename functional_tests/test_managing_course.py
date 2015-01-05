@@ -1,3 +1,4 @@
+from time import sleep
 from unittest import skip
 
 from functional_tests.base import FunctionalTest
@@ -92,39 +93,52 @@ class NewTeacherTest(FunctionalTest):
 
         # And new week was added
         new_week = self.browser.find_element_by_class_name("week")
-        self.assertEqual(new_week.text, "Week 1")
+        new_week_title = new_week.find_element_by_class_name("title")
+        self.assertEqual(new_week_title.text, "Week 1")
+
+        # She clicks on the new week..
+        new_week_title.click()
 
         # She decided to add a new lecture to that week
         new_week.find_element_by_class_name("add-lecture").click()
 
         # She is on the New Lecture form
         # She puts a lecture title..
-        title_input = self.browser.find_element_by_id("course-title")
+        title_input = self.browser.find_element_by_id("id_title")
         title_input.send_keys("An introduction to the course")
 
         # ..then she puts URL of the lecture..
-        url_input = self.browser.find_element_by_id("course-video")
+        url_input = self.browser.find_element_by_id("id_video_url")
         url_input.send_keys("http://vimeo.com/14612897")
 
         # After that, she clicks on Submit..
-        submit = self.browser.find_element_by_id("submit")
+        submit = self.browser.find_element_by_tag_name("button")
         submit.click()
 
         # Woops! Only Youtube video allowed :(
         # Olga received a validation error
-        error = self.get_error_element()
-        self.assertEqual(error.text, "Only videos from YouTube are allowed")
+        error = self.browser.find_element_by_class_name('errorlist')\
+            .find_element_by_tag_name("li")
+        self.assertEqual(error.text, "Only videos from YouTube are allowed.")
 
-        # "OK!" - Olga thought and puts a new URL to that field
+        # "OK!" - Olga thoughts and puts a new URL to that field
+        url_input = self.browser.find_element_by_id("id_video_url")
+        url_input.clear()
         url_input.send_keys("https://www.youtube.com/watch?v=E5rFiDmSPbY")
-        submit.click()
+
+        # And click...
+        self.browser.find_element_by_tag_name("button").click()
+
 
         # Done! Now Olga is on the Manage Lecture page
         # And she sees that the new lecture is on the page
-        self.assertInHTML("An introduction to the course", self.browser.page_source)
+        new_week = self.browser.find_element_by_class_name("week")
+        new_week_title = new_week.find_element_by_class_name("title")
+        self.assertEqual(new_week_title.text, "Week 1")
+        # She clicks on the new week..
+        new_week_title.click()
 
-    def get_error_element(self):
-        return self.browser.find_element_by_css_selector('.has-error')
+        self.assertInHTML("An introduction to the course", new_week.find_element_by_class_name("list-group-item").text)
 
     def enter_to_form_element(self, el_name, text):
         el = self.browser.find_element_by_css_selector('[name=%s]' % (el_name))

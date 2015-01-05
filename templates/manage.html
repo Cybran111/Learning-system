@@ -8,10 +8,10 @@
         {% for week in lectures_by_week %}
 
 
-            <div class="panel panel-default">
+            <div class="panel panel-default week">
                 <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
                     <h4 class="panel-title">
-                        <a class="collapsed week" data-toggle="collapse" data-parent="#accordion"
+                        <a class="collapsed title" data-toggle="collapse" data-parent="#accordion"
                            href="#collapse{{ forloop.counter }}" aria-expanded="false"
                            aria-controls="collapse{{ forloop.counter }}">
                             Week {{ forloop.counter }}
@@ -30,6 +30,9 @@
                                     {{ lecture.title }}
                                 </a>
                             {% endfor %}
+                            {#                        FIXME: should use week.number, not forloop.counter#}
+                            <a href="{% url "courses:manage_lecture" course_id=course.id week_number=forloop.counter %} "
+                               class="list-group-item list-group-item-info add-lecture">Add new lecture</a>
 
                         </div>
                     </div>
@@ -38,17 +41,17 @@
 
 
         {% endfor %}
-{#        <div class="panel panel-primary">#}
-{#            <div class="panel-heading" role="tab">#}
-{#                <h4 class="panel-title">#}
+        {#        <div class="panel panel-primary">#}
+        {#            <div class="panel-heading" role="tab">#}
+        {#                <h4 class="panel-title">#}
 
-                    <form id="new_week" action="{% url 'courses:manage_week' course.id %}" method="post">
-                        {% csrf_token %}
-                        <button id="add-week" type="submit" class="btn btn-primary btn-lg btn-block">Add new week</button>
-                    </form>
-{#                </h4>#}
-{#            </div>#}
-{#        </div>#}
+        <form id="new_week" action="{% url 'courses:manage_week' course.id %}" method="post">
+            {% csrf_token %}
+            <button id="add-week" type="submit" class="btn btn-primary btn-lg btn-block">Add new week</button>
+        </form>
+        {#                </h4>#}
+        {#            </div>#}
+        {#        </div>#}
 
     </div>
 {% endblock %}

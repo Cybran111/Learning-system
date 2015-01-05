@@ -1,3 +1,5 @@
+from django.core.exceptions import NON_FIELD_ERRORS
+
 __author__ = 'cybran'
 from django import forms
 
@@ -6,18 +8,32 @@ from models import Course, Lecture
 
 class NewLectureForm(forms.ModelForm):
     class Meta:
+        error_css_class = 'has-error'
         model = Lecture
         fields = ['title', 'video_url',]
         labels = {
+            'title': 'Title',
             'video_url': 'Video lecture URL',
         }
 
         widgets = {
+            'title': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter title',
+                    'class': 'form-control'
+                }),
+
             'video_url': forms.URLInput(
                 attrs={
                     'placeholder': 'Enter URL to the lecture (only YouTube allowed)',
                     'class': 'form-control'
                 }),
+        }
+
+        error_messages = {
+            'video_url': {
+                'invalid': "Only videos from YouTube are allowed.",
+            },
         }
 
 
