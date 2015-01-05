@@ -6,7 +6,6 @@ from courses.forms import NewCourseForm
 from courses.models import Course, Week, Lecture
 
 
-
 # Create your views here.
 
 def home_page(request):

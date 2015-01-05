@@ -1,19 +1,23 @@
 __author__ = 'cybran'
 from django import forms
 
-from models import Course, Lecture, Week
-
+from models import Course, Lecture
 
 
 class NewLectureForm(forms.ModelForm):
     class Meta:
         model = Lecture
-        fields = ['title', 'video_url']
+        fields = ['title', 'video_url',]
+        labels = {
+            'video_url': 'Video lecture URL',
+        }
+
         widgets = {
-            'video_url': forms.URLInput(attrs={
-                'placeholder': 'Enter URL of the lecture',
-                'class': 'form-control'
-            }),
+            'video_url': forms.URLInput(
+                attrs={
+                    'placeholder': 'Enter URL to the lecture (only YouTube allowed)',
+                    'class': 'form-control'
+                }),
         }
 
 

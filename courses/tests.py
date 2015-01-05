@@ -1,7 +1,9 @@
-from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
+
 from django.test import TestCase
 from django.utils.html import escape
+
+from courses.forms import NewLectureForm
 
 from courses.models import Course, Week, Lecture
 
@@ -21,7 +23,6 @@ class CRUDTest(CourseTest):
 
         response = self.client.get('/courses/%s/week/%s/lecture/%s/' % (PK, PK, PK))
         self.assertContains(response, lecture.embed_video_url)
-
 
     def test_can_get_course_lectures_page(self):
         response = self.client.get('/courses/%s/lectures/' % PK)
@@ -98,7 +99,6 @@ class SaveCourseTest(TestCase):
         )
         self.assertRedirects(response, 'courses/1/')
 
-
     def test_can_save_new_course(self):
         self.client.post(
             '/courses/new',
@@ -142,17 +142,23 @@ class ModelsTest(TestCase):
         week.course = course
         week.save()
 
-        lecture = Lecture()
-        lecture.title = "My lecture"
-        lecture.week = week
-        lecture.order_id = 1
+        data = {
+            "title": "My lecture",
+            "week": week,
+            "order_id": 1,
+            "embed_video_url": "https://www.youtube.com/embed/lXn7XKLA6Vg",
+        }
 
-        lecture.video_url = "http://habrahabr.ru"
-        self.assertRaises(ValidationError, lecture.full_clean)
+        # For easy use
+        _assert_true = self.assertTrue
+        _assert_false = self.assertFalse
+        urls = (
+            ("http://habrahabr.ru", _assert_false),
+            ("https://www.google.com.ua/", _assert_false),
+            ("https://www.youtube.com/watch?v=lXn7XKLA6Vg", _assert_true)
+        )
 
-        lecture.video_url = "https://www.google.com.ua/"
-        self.assertRaises(ValidationError, lecture.full_clean)
-
-        lecture.embed_video_url = "https://www.youtube.com/embed/lXn7XKLA6Vg"
-        lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
-        lecture.full_clean()
+        for url, suggested_func in urls:
+            data["video_url"] = url
+            lecture = NewLectureForm(data=data)
+            suggested_func(lecture.is_valid())
