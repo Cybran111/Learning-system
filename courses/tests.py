@@ -14,6 +14,15 @@ class CourseTest(TestCase):
 
 
 class CRUDTest(CourseTest):
+    def test_can_get_lecture(self):
+        course = Course.objects.get(pk=PK)
+        week = Week.objects.get(course=course, number=PK)
+        lecture = Lecture.objects.get(week=week, order_id=PK)
+
+        response = self.client.get('/courses/%s/week/%s/lecture/%s/' % (PK, PK, PK))
+        self.assertContains(response, lecture.embed_video_url)
+
+
     def test_can_get_course_lectures_page(self):
         response = self.client.get('/courses/%s/lectures/' % PK)
         course = Course.objects.get(pk=PK)
@@ -28,7 +37,7 @@ class CRUDTest(CourseTest):
         response = self.client.get('/courses/%s/manage/' % (course.id))
 
         for lecture in self.get_lectures(course):
-            self.assertContains(response, lecture.title)
+            self.assertContains(response, escape(lecture.title))
 
     def test_can_add_week(self):
         course = Course.objects.get(pk=PK)
@@ -78,7 +87,6 @@ class ListTest(CourseTest):
         self.assertEqual(response.content.decode(), expected_html)
 
 
-
 class SaveCourseTest(TestCase):
     def setUp(self):
         self.course_data = {'title': 'My course', 'short_desc': 'A tiny course', 'full_desc': "A REALLY tiny course"}
@@ -118,6 +126,7 @@ class ModelsTest(TestCase):
         lecture.title = "My lecture"
         lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
         lecture.week = week
+        lecture.order_id = 1
         lecture.save()
 
         self.assertEqual(week, Week.objects.get(course=course))
@@ -136,6 +145,7 @@ class ModelsTest(TestCase):
         lecture = Lecture()
         lecture.title = "My lecture"
         lecture.week = week
+        lecture.order_id = 1
 
         lecture.video_url = "http://habrahabr.ru"
         self.assertRaises(ValidationError, lecture.full_clean)
@@ -143,5 +153,6 @@ class ModelsTest(TestCase):
         lecture.video_url = "https://www.google.com.ua/"
         self.assertRaises(ValidationError, lecture.full_clean)
 
+        lecture.embed_video_url = "https://www.youtube.com/embed/lXn7XKLA6Vg"
         lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
         lecture.full_clean()

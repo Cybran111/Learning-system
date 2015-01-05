@@ -88,14 +88,14 @@ class NewTeacherTest(FunctionalTest):
         self.assertFalse(self.browser.find_elements_by_class_name("week"))
 
         # ..so let's add a new one!
-        self.browser.find_element_by_id("add-week")
+        self.browser.find_element_by_id("add-week").click()
 
         # And new week was added
         new_week = self.browser.find_element_by_class_name("week")
         self.assertEqual(new_week.text, "Week 1")
 
         # She decided to add a new lecture to that week
-        new_week.find_element_by_class("add-lecture").click()
+        new_week.find_element_by_class_name("add-lecture").click()
 
         # She is on the New Lecture form
         # She puts a lecture title..
