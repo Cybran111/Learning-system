@@ -1,0 +1,172 @@
+[
+  {
+    "fields": {
+      "short_description": "Aliquam vitae orci tincidunt, mattis orci sit amet, condimentum turpis. Donec volutpat felis quis mollis.",
+      "full_description": "Maecenas porttitor at ante feugiat posuere. Praesent vel elit et ligula laoreet maximus in sed nunc. Maecenas sit amet pharetra purus, et auctor ex. In commodo, tortor a aliquam feugiat, nulla justo rutrum elit, ut blandit diam ipsum ac risus? Nunc vitae magna a magna dapibus consequat. Nam vestibulum ac nulla id convallis. Nullam sed aliquam massa, in malesuada mauris. Nunc a mi vel risus imperdiet volutpat! Curabitur eu arcu quam.\r\n\r\nNulla fringilla dictum quam porttitor varius. Nullam tempus ante sit amet efficitur mattis. Sed convallis; nibh interdum efficitur condimentum, metus dui fermentum arcu, vitae molestie dui augue et felis. Fusce sit amet mi eu augue ultrices hendrerit a in sapien! Mauris convallis vestibulum sapien, eget suscipit augue pellentesque ac. Nunc egestas odio quis tellus aliquam sollicitudin! Fusce turpis velit; blandit quis libero et, facilisis congue nibh. Fusce ac nisl purus?",
+      "img": "../media/courses/default.png",
+      "title": "Nulla mollis neque eget lorem"
+    },
+    "model": "courses.course",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "short_description": "Fusce eget porta lacus. Proin tincidunt metus urna, vitae rutrum metus imperdiet non. Aliquam erat.",
+      "full_description": "Vestibulum rutrum sit amet nulla in laoreet. Duis porta accumsan tortor eget commodo. Duis tempus diam in mauris maximus, ut vehicula erat iaculis. Donec ornare lectus ligula, sed venenatis neque dapibus eu. Proin sem neque, iaculis sed faucibus eu, fringilla nec urna. Sed vitae felis tempor, dignissim magna ut, venenatis arcu. Duis lorem odio; congue nec consequat eget, euismod nec ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget velit vestibulum dolor convallis imperdiet! Etiam purus nunc, convallis varius placerat sit amet, iaculis sed eros. Pellentesque vitae est ultrices lorem ultrices mollis imperdiet et nibh. Nulla semper aliquet pulvinar. Aliquam accumsan lacus purus; at cursus ex pulvinar at. Quisque a convallis ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\r\n\r\nEtiam vulputate quam magna, nec lacinia erat bibendum ut. Nulla ac varius leo. Maecenas et consectetur ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis at nisl sed nulla condimentum commodo. Praesent tempus dolor ac tortor molestie, eu fermentum tellus elementum. Praesent ullamcorper leo vel felis tincidunt, in rutrum orci convallis. Nam sodales convallis dui, pharetra varius justo finibus sed? Sed dignissim varius sem, sit amet vehicula leo posuere id.",
+      "img": "../media/courses/default.png",
+      "title": "Phasellus sodales odio ut tempus."
+    },
+    "model": "courses.course",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "course": 1,
+      "number": 1
+    },
+    "model": "courses.week",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "course": 1,
+      "number": 2
+    },
+    "model": "courses.week",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "course": 1,
+      "number": 3
+    },
+    "model": "courses.week",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "course": 2,
+      "number": 1
+    },
+    "model": "courses.week",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "course": 2,
+      "number": 2
+    },
+    "model": "courses.week",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "order_id": 1,
+      "week": 1,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Cum fiscina velum, omnes classises desiderium azureus, ferox decores."
+    },
+    "model": "courses.lecture",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "order_id": 2,
+      "week": 1,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Cum cedrium velum, omnes itineris tramitemes promissio dexter, brevis galataees."
+    },
+    "model": "courses.lecture",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "order_id": 1,
+      "week": 2,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Cum extum velum, omnes contencioes experientia germanus, lotus plasmatores."
+    },
+    "model": "courses.lecture",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "order_id": 2,
+      "week": 2,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Assimilatios sunt ventuss de raptus axona."
+    },
+    "model": "courses.lecture",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "order_id": 1,
+      "week": 3,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Secundus, lotus cobaltums absolute amor de grandis, magnum amicitia."
+    },
+    "model": "courses.lecture",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "order_id": 2,
+      "week": 3,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Heu."
+    },
+    "model": "courses.lecture",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "order_id": 1,
+      "week": 4,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Cur adelphis persuadere?"
+    },
+    "model": "courses.lecture",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "order_id": 2,
+      "week": 4,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Cur era accelerare?"
+    },
+    "model": "courses.lecture",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "order_id": 1,
+      "week": 5,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Est brevis deus, cesaris."
+    },
+    "model": "courses.lecture",
+    "pk": 9
+  },
+  {
+    "fields": {
+      "order_id": 2,
+      "week": 5,
+      "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+      "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+      "title": "Camerarius torquis etiam perderes hilotae est."
+    },
+    "model": "courses.lecture",
+    "pk": 10
+  }
+]

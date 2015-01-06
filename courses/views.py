@@ -59,7 +59,7 @@ def manage_week_view(request, course_id):
     week_count = Week.objects.filter(course=course).count()
     Week.objects.create(course=course, number=week_count + 1)
 
-    return redirect("courses:manage_course", course_id=course.id)
+    return redirect("courses:manage", course_id=course.id)
 
 
 # @require_http_methods(["POST"])
@@ -80,7 +80,7 @@ def manage_lecture_view(request, course_id, week_number):
             new_lecture.embed_video_url = "https://www.youtube.com/embed/" + new_lecture.video_url[-11:]
 
             new_lecture.save()
-            return redirect("courses:manage_course", course_id=course.id)
+            return redirect("courses:manage", course_id=course.id)
 
     else:
         form = NewLectureForm()  # An unbound form
