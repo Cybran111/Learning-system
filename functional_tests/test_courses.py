@@ -25,26 +25,21 @@ class NewStudentTest(FunctionalTest):
         self.assertIn(course_short_description, self.browser.page_source)
         self.assertIsNotNone(self.browser.find_element_by_id("full-desc"))
 
-    @skip("For removing")
-    def test_can_browse_lectures_by_the_week(self):
-        # Alice wanna see the course topics and lectures
-
-        # She goes to the site...
-        self.browser.get(self.live_server_url)
-
-        _list = self.browser.find_element_by_class_name('list-group')
-
-        # ...she goes to the first course and click on it...
-        _list.find_element_by_class_name("list-group-item").click()
-
-        # ...she finds the element that redirects her to the course lecture list...
-        self.browser.find_element_by_id('lecture-page').click()
+        # Now she clicks on the "Enroll" button
+        self.browser.find_element_by_id("enroll").click()
 
 
-        # She sees that page has a week list with  lecture lists on every week
-        weeks = self.browser.find_elements_by_class_name("panel")
+        # And she is on the lecture list page
+        self.assertIsNotNone(self.browser.find_element_by_id("weeks-list"))
 
+        # She decided to go to the lecture
+        week = self.browser.find_element_by_class_name("week")
+        week.find_element_by_class_name("title").click()
+        week.find_element_by_class_name("list-group-item").click()
 
+        # She watching the video lecture with pleasure
+        self.browser.find_element_by_id("video")
 
-
+        # When she finished watching, she goes to her dashboard to see that this course
+        self.fail("Finish the test")
 

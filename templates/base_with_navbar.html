@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{#FIXME: views not always provide the course (for title)#}
+{% block title %} {{ course.title }} - E-Learning System {% endblock %}
+
+{% block navbar %}
+{% include "navbar.html" %}
+{% endblock %}

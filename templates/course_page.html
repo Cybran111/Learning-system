@@ -1,11 +1,13 @@
-{% extends "base.html" %}
-
-{% block title %} {{ course.title }} - E-Learning System {% endblock %}
+{% extends "base_with_navbar.html" %}
 
 {% block content %}
-<h2> {{ course.title }}</h2>
-<h3>{{ course.short_description }}</h3>
-<div id="full-desc"> {{ course.full_description }}</div>
-<a id="lecture-page" href="lectures/">Go to the lecture list</a>
-<a id="manage-course" href="manage/">Manage a course list</a>
+    <h2> {{ course.title }}</h2>
+    <h3>{{ course.short_description }}</h3>
+    <div id="full-desc"> {{ course.full_description }}</div>
+    <form action="{% url "dashboard:enroll" course=course.id %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary btn-lg" type="submit" value="Submit">
+    </form>
+    <a id="lecture-page" href="{% url "courses:lectures" %}">Go to the lecture list</a>
+    <a id="manage-course" href="{% url "courses:manage" %}">Manage a course list</a>
 {% endblock %}

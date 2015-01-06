@@ -1,38 +1,30 @@
-{% extends "base.html" %}
-{% include "navbar.html" %}
-
-{% block title %} {{ course.title }} - E-Learning System {% endblock %}
+{% extends "base_with_navbar.html" %}
 
 {% block content %}
     <div class="panel-group" id="weeks-list" role="tablist" aria-multiselectable="true">
 
-        {% for week in lectures_by_week %}
+        {% for week in weeks %}
 
-
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+            <div class="panel panel-default week">
+                <div class="panel-heading" role="tab" id="heading{{ week.number }}">
                     <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapse{{ forloop.counter }}" aria-expanded="false"
-                           aria-controls="collapse{{ forloop.counter }}">
-                            Week {{ forloop.counter }}
+                        <a class="collapsed title" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse{{ week.number }}" aria-expanded="false"
+                           aria-controls="collapse{{ week.number }}">
+                            Week {{ week.number }}
 
                         </a>
                     </h4>
                 </div>
-                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel"
-                     aria-labelledby="heading{{ forloop.counter }}">
+                <div id="collapse{{ week.number }}" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading{{ week.number }}">
                     <div class="panel-body">
 
                         <div class="lecture-list list-group">
-                            {% for lecture  in week %}
-
+                            {% for lecture  in week.lecture_set.all %}
                                 <a href="{{ lecture.video_url }}" class="list-group-item">
                                     {{ lecture.title }}
                                 </a>
-                                <div class="embed-responsive embed-responsive-16by9">
-                                  <iframe class="embed-responsive-item" src="{{ lecture.video_url }}"></iframe>
-                                </div>
                             {% endfor %}
 
                         </div>

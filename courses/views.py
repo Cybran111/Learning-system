@@ -29,7 +29,8 @@ def lecture_view(request, course_id, week_number, lecture_number):
 
 def lecture_list_view(request, course_id):
     course = Course.objects.get(pk=course_id)
-    return render(request, 'lectures.html', {'lectures_by_week': get_lectures(course)})
+    weeks = Week.objects.filter(course=course)
+    return render(request, 'lectures.html', {'weeks': weeks})
 
 
 def manage_course_view(request, course_id):
@@ -49,8 +50,7 @@ def create_course_view(request):
             return redirect(reverse('courses:course_page', args=(new_course.id,)))
     else:
         form = NewCourseForm()
-
-    return render(request, 'new_course.html', {"new_course_form": form})
+        return render(request, 'new_course.html', {"new_course_form": form})
 
 
 @require_POST
@@ -88,22 +88,6 @@ def manage_lecture_view(request, course_id, week_number):
     return render(request, 'new_lecture.html', {
         'form': form,
     })
-
-
-# course = Course.objects.get(pk=course_id)
-# week = Week.objects.get(course=course, number=week_number)
-#
-# video_url = request.POST["video_url"]
-# Lecture.objects.create(week=week,
-# order_id=Lecture.objects.filter(week=week).count() + 1,
-# title=request.POST["title"],
-# video_url=video_url,
-# # Form validation guarantees that the video_url is already secure
-#                        # (but still there is a validation on the Model level)
-#                        # So we can just splitting the URL string
-#                        embed_video_url="https://www.youtube.com/embed/" + video_url[-11:])
-#
-#
 
 
 def get_lectures(course):
