@@ -4,4 +4,4 @@ python:
 # command to install dependencies
 install: pip install -r requirements.txt
 # command to run tests
-script: manage.py test courses
+script: python manage.py test courses
