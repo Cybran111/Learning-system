@@ -1,10 +1,9 @@
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
-
 from django.test import TestCase
 from django.utils.html import escape
 
 from courses.forms import NewLectureForm
-
 from courses.models import Course, Week, Lecture
 
 
@@ -28,10 +27,12 @@ class CRUDTest(CourseTest):
         response = self.client.get('/courses/%s/lectures/' % PK)
         course = Course.objects.get(pk=PK)
 
-        lectures = self.get_lectures(course)
+        lectures = (reverse("courses:lecture", args=(course.id, week.number, lecture.order_id))
+                    for week in course.week_set.all()
+                    for lecture in week.lecture_set.all())
 
         for lecture in lectures:
-            self.assertContains(response, lecture.video_url)
+            self.assertContains(response, lecture)
 
     def test_can_get_manage_page(self):
         course = Course.objects.get(pk=PK)
@@ -80,85 +81,86 @@ class CRUDTest(CourseTest):
         return lectures
 
 
-class ListTest(CourseTest):
-    def test_homepage_returns_correct_page_with_list(self):
-        response = self.client.get('/')
-        courses = Course.objects.all()
-        expected_html = render_to_string('homepage.html', {"courses": courses})
-        self.assertEqual(response.content.decode(), expected_html)
+    class ListTest(CourseTest):
+        def test_homepage_returns_correct_page_with_list(self):
+            response = self.client.get('/')
+            courses = Course.objects.all()
+            expected_html = render_to_string('homepage.html', {"courses": courses})
+            self.assertEqual(response.content.decode(), expected_html)
 
 
-class SaveCourseTest(TestCase):
-    def setUp(self):
-        self.course_data = {'title': 'My course', 'short_desc': 'A tiny course', 'full_desc': "A REALLY tiny course"}
+    class SaveCourseTest(TestCase):
+        def setUp(self):
+            self.course_data = {'title': 'My course', 'short_desc': 'A tiny course',
+                                'full_desc': "A REALLY tiny course"}
 
-    def test_redirect_to_coursepage_when_created(self):
-        response = self.client.post(
-            '/courses/new',
-            data=self.course_data
-        )
-        self.assertRedirects(response, 'courses/1/')
+        def test_redirect_to_coursepage_when_created(self):
+            response = self.client.post(
+                '/courses/new',
+                data=self.course_data
+            )
+            self.assertRedirects(response, 'courses/1/')
 
-    def test_can_save_new_course(self):
-        self.client.post(
-            '/courses/new',
-            data=self.course_data,
-        )
-        self.assertEqual(Course.objects.count(), 1)
-        new_course = Course.objects.first()
-        self.assertEqual(new_course.title, 'My course')
-        self.assertEqual(new_course.short_description, 'A tiny course')
-        self.assertEqual(new_course.full_description, 'A REALLY tiny course')
+        def test_can_save_new_course(self):
+            self.client.post(
+                '/courses/new',
+                data=self.course_data,
+            )
+            self.assertEqual(Course.objects.count(), 1)
+            new_course = Course.objects.first()
+            self.assertEqual(new_course.title, 'My course')
+            self.assertEqual(new_course.short_description, 'A tiny course')
+            self.assertEqual(new_course.full_description, 'A REALLY tiny course')
 
 
-class ModelsTest(TestCase):
-    def test_course_can_holds_weeks_and_lectures(self):
-        course = Course()
-        course.title = "A little title"
-        course.save()
+    class ModelsTest(TestCase):
+        def test_course_can_holds_weeks_and_lectures(self):
+            course = Course()
+            course.title = "A little title"
+            course.save()
 
-        week = Week()
-        week.course = course
-        week.number = 1
-        week.save()
+            week = Week()
+            week.course = course
+            week.number = 1
+            week.save()
 
-        lecture = Lecture()
-        lecture.title = "My lecture"
-        lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
-        lecture.week = week
-        lecture.order_id = 1
-        lecture.save()
+            lecture = Lecture()
+            lecture.title = "My lecture"
+            lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
+            lecture.week = week
+            lecture.order_id = 1
+            lecture.save()
 
-        self.assertEqual(week, Week.objects.get(course=course))
-        self.assertEqual(lecture, Lecture.objects.get(week=week))
+            self.assertEqual(week, Week.objects.get(course=course))
+            self.assertEqual(lecture, Lecture.objects.get(week=week))
 
-    def test_lecture_cant_have_not_youtube_url(self):
-        course = Course()
-        course.title = "Yet another title"
-        course.save()
+        def test_lecture_cant_have_not_youtube_url(self):
+            course = Course()
+            course.title = "Yet another title"
+            course.save()
 
-        week = Week()
-        week.number = 1
-        week.course = course
-        week.save()
+            week = Week()
+            week.number = 1
+            week.course = course
+            week.save()
 
-        data = {
-            "title": "My lecture",
-            "week": week,
-            "order_id": 1,
-            "embed_video_url": "https://www.youtube.com/embed/lXn7XKLA6Vg",
-        }
+            data = {
+                "title": "My lecture",
+                "week": week,
+                "order_id": 1,
+                "embed_video_url": "https://www.youtube.com/embed/lXn7XKLA6Vg",
+            }
 
-        # For easy use
-        _assert_true = self.assertTrue
-        _assert_false = self.assertFalse
-        urls = (
-            ("http://habrahabr.ru", _assert_false),
-            ("https://www.google.com.ua/", _assert_false),
-            ("https://www.youtube.com/watch?v=lXn7XKLA6Vg", _assert_true)
-        )
+            # For easy use
+            _assert_true = self.assertTrue
+            _assert_false = self.assertFalse
+            urls = (
+                ("http://habrahabr.ru", _assert_false),
+                ("https://www.google.com.ua/", _assert_false),
+                ("https://www.youtube.com/watch?v=lXn7XKLA6Vg", _assert_true)
+            )
 
-        for url, suggested_func in urls:
-            data["video_url"] = url
-            lecture = NewLectureForm(data=data)
-            suggested_func(lecture.is_valid())
+            for url, suggested_func in urls:
+                data["video_url"] = url
+                lecture = NewLectureForm(data=data)
+                suggested_func(lecture.is_valid())

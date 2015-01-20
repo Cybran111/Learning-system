@@ -30,7 +30,8 @@ def lecture_view(request, course_id, week_number, lecture_number):
 def lecture_list_view(request, course_id):
     course = Course.objects.get(pk=course_id)
     weeks = Week.objects.filter(course=course)
-    return render(request, 'lectures.html', {'weeks': weeks})
+    # FIXME: code smells
+    return render(request, 'lectures.html', {"course_id": course.id, 'weeks': weeks})
 
 
 def manage_course_view(request, course_id):

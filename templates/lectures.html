@@ -22,7 +22,7 @@
 
                         <div class="lecture-list list-group">
                             {% for lecture  in week.lecture_set.all %}
-                                <a href="{{ lecture.video_url }}" class="list-group-item">
+                                <a href="{% url "courses:lecture" course_id week.number lecture.order_id %}" class="list-group-item">
                                     {{ lecture.title }}
                                 </a>
                             {% endfor %}

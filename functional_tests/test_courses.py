@@ -1,3 +1,4 @@
+from time import sleep
 from unittest import skip
 from functional_tests.base import FunctionalTest
 
@@ -6,11 +7,26 @@ from functional_tests.base import FunctionalTest
 class NewStudentTest(FunctionalTest):
     fixtures = ["courses/fixtures/tests_data.json"]
 
-    def test_can_go_to_course_page(self):
+    # FIXME: separate to several tests
+    def test_can_watch_lecture_of_course(self):
         ## Alice wanna to look at course
 
-        ## She clicks on the first course
+        # She registering...
         self.browser.get(self.live_server_url)
+        self.browser.find_element_by_id("register").click()
+
+        username = self.browser.find_element_by_id("id_username")
+        username.send_keys("Alice")
+
+        email = self.browser.find_element_by_id("id_email")
+        email.send_keys("alice@example.com")
+
+        password = self.browser.find_element_by_id("id_password")
+        password.send_keys("asecretpassword")
+
+        self.browser.find_element_by_id("submit").click()
+
+        ## She clicks on the first course
         _list = self.browser.find_element_by_class_name('list-group')
 
         # getting first element in list..
@@ -28,7 +44,6 @@ class NewStudentTest(FunctionalTest):
         # Now she clicks on the "Enroll" button
         self.browser.find_element_by_id("enroll").click()
 
-
         # And she is on the lecture list page
         self.assertIsNotNone(self.browser.find_element_by_id("weeks-list"))
 
@@ -41,5 +56,7 @@ class NewStudentTest(FunctionalTest):
         self.browser.find_element_by_id("video")
 
         # When she finished watching, she goes to her dashboard to see that this course
-        self.fail("Finish the test")
+        self.browser.find_element_by_id("user").click()
+
+        self.browser.find_element_by_id("enrolled")
 
