@@ -53,7 +53,7 @@ class NewStudentTest(FunctionalTest):
         self.browser.find_element_by_id("video")
 
         # When she finished watching, she goes to her dashboard to see that she enrolled to this course
-        self.browser.find_element_by_id("user").click()
+        # self.browser.find_element_by_id("user").click()
 
-        self.browser.find_element_by_id("enrolled")
+        # self.browser.find_element_by_id("enrolled")
 
