@@ -6,11 +6,6 @@ from courses.forms import NewCourseForm, NewLectureForm
 from courses.models import Course, Week, Lecture
 
 
-
-
-
-# Create your views here.
-
 def home_page(request):
     return render(request, 'homepage.html', {"courses": Course.objects.all()})
 
@@ -63,7 +58,6 @@ def manage_week_view(request, course_id):
     return redirect("courses:manage", course_id=course.id)
 
 
-# @require_http_methods(["POST"])
 def manage_lecture_view(request, course_id, week_number):
     if request.method == 'POST':  # If the form has been submitted...
 
@@ -86,14 +80,9 @@ def manage_lecture_view(request, course_id, week_number):
     else:
         form = NewLectureForm()  # An unbound form
 
-    return render(request, 'new_lecture.html', {
-        'form': form,
-    })
+    return render(request, 'new_lecture.html', {'form': form, })
 
 
 def get_lectures(course):
-    lectures = (
-        Lecture.objects.filter(week=week)
-        for week in Week.objects.filter(course=course)
-    )
+    lectures = (Lecture.objects.filter(week=week) for week in Week.objects.filter(course=course))
     return lectures

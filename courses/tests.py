@@ -27,9 +27,8 @@ class CRUDTest(CourseTest):
         response = self.client.get('/courses/%s/lectures/' % PK)
         course = Course.objects.get(pk=PK)
 
-        lectures = (reverse("courses:lecture", args=(course.id, week.number, lecture.order_id))
-                    for week in course.week_set.all()
-                    for lecture in week.lecture_set.all())
+        lectures = (reverse("courses:lecture", args=(course.id, week.number, lecture.order_id)) for week in
+                    course.week_set.all() for lecture in week.lecture_set.all())
 
         for lecture in lectures:
             self.assertContains(response, lecture)
@@ -54,10 +53,8 @@ class CRUDTest(CourseTest):
         week = Week.objects.filter(course=course)[0]
         lectures_count = self.get_lectures_count(week)
         response = self.client.post('/courses/%s/manage/week/%s/' % (course.id, week.number),
-                                    {
-                                        "title": "My little lecture",
-                                        "video_url": "https://www.youtube.com/watch?v=sm0QQO-WZlM",
-                                    })
+                                    {"title": "My little lecture",
+                                     "video_url": "https://www.youtube.com/watch?v=sm0QQO-WZlM", })
         self.assertRedirects(response, "/courses/%s/manage/" % (course.id))
         self.assertNotEqual(lectures_count, self.get_lectures_count(week))
 
@@ -76,8 +73,8 @@ class CRUDTest(CourseTest):
         return Lecture.objects.filter(week=week).count()
 
     def get_lectures(self, course):
-        lectures = (lecture for week in Week.objects.filter(course=course)
-                    for lecture in Lecture.objects.filter(week=week))
+        lectures = (lecture for week in Week.objects.filter(course=course) for lecture in
+                    Lecture.objects.filter(week=week))
         return lectures
 
 
@@ -95,17 +92,11 @@ class CRUDTest(CourseTest):
                                 'full_desc': "A REALLY tiny course"}
 
         def test_redirect_to_coursepage_when_created(self):
-            response = self.client.post(
-                '/courses/new',
-                data=self.course_data
-            )
+            response = self.client.post('/courses/new', data=self.course_data)
             self.assertRedirects(response, 'courses/1/')
 
         def test_can_save_new_course(self):
-            self.client.post(
-                '/courses/new',
-                data=self.course_data,
-            )
+            self.client.post('/courses/new', data=self.course_data, )
             self.assertEqual(Course.objects.count(), 1)
             new_course = Course.objects.first()
             self.assertEqual(new_course.title, 'My course')
@@ -144,19 +135,14 @@ class CRUDTest(CourseTest):
             week.course = course
             week.save()
 
-            data = {
-                "title": "My lecture",
-                "week": week,
-                "order_id": 1,
-                "embed_video_url": "https://www.youtube.com/embed/lXn7XKLA6Vg",
-            }
+            data = {"title": "My lecture", "week": week, "order_id": 1,
+                    "embed_video_url": "https://www.youtube.com/embed/lXn7XKLA6Vg", }
 
             # For easy use
             _assert_true = self.assertTrue
             _assert_false = self.assertFalse
             urls = (
-                ("http://habrahabr.ru", _assert_false),
-                ("https://www.google.com.ua/", _assert_false),
+                ("http://habrahabr.ru", _assert_false), ("https://www.google.com.ua/", _assert_false),
                 ("https://www.youtube.com/watch?v=lXn7XKLA6Vg", _assert_true)
             )
 
