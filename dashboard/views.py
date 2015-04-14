@@ -61,6 +61,4 @@ def register(request):
 
 
 def dashboard(request, username):
-
-
-    return None
+    return render(request, 'homepage.html')

@@ -13,7 +13,7 @@ urlpatterns = patterns('',
                        url(r'^register/$', views.register, name='register'),
                        url(r'^login/$', views.auth, name='login'),
                        url(r'^enroll/$', views.enroll, name='enroll'),
-                       url(r'^dashboard/(?P<username>\S+)/$', views.dashboard, name='dashboard'),
+                       url(r'^(?P<username>\S+)/$', views.dashboard, name='dashboard'),
 
 )
 
