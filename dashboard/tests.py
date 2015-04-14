@@ -37,12 +37,12 @@ class UserInteractionTest(TestCase):
                              "password": "johnpassword"
                          })
         user = User.objects.get(username="john")
-        self.assertEqual(self.client.session[SESSION_KEY], user.pk)
+        self.assertEqual(int(self.client.session[SESSION_KEY]), user.pk)
 
     def test_login_allow_with_good_cred(self):
         user = User.objects.create_user('john', 'john@lennon.com', 'johnpassword')
         self.client.post('/dashboard/login/', {'username': 'john', "password": "johnpassword"})
-        self.assertEqual(self.client.session[SESSION_KEY], user.pk)
+        self.assertEqual(int(self.client.session[SESSION_KEY]), user.pk)
 
 
 def test_login_deny_with_bad_cred(self):
