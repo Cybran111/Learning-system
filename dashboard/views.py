@@ -19,6 +19,7 @@ def enroll(request):
 
     return redirect("courses:lectures", (course.id))
 
+
 def auth(request):
     # FIXME: notification about bad credentials is not show
     if request.method == 'POST':
@@ -46,21 +47,20 @@ def register(request):
                 password=form.data['password']
             )
 
-
             # Now we save the UserProfile model instance.
-
             user = authenticate(username=form.data['username'], password=form.data['password'])
             login(request, user)
-            profile = Profile.objects.create(user=user)
+            Profile.objects.create(user=user)
 
-            # user.set_password(user.password)
-
-            # if 'avatar' in request.FILES:
-            # user.avatar = request.FILES['avatar']
-            # user.save()
             return redirect("home")
 
     else:
         form = RegisterForm()
 
     return render(request, 'register.html', {'form': form})
+
+
+def dashboard(request, username):
+
+
+    return None

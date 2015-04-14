@@ -1,9 +1,7 @@
 from django.conf.urls import patterns, url
 
-from . import views
+from dashboard import views
 
-
-__author__ = 'cybran'
 urlpatterns = patterns('',
                        # Examples:
                        # url(r'^$', 'E_Learning_system.views.home', name='home'),
@@ -14,8 +12,8 @@ urlpatterns = patterns('',
                        # url(r'^admin/', include(admin.site.urls)),
                        url(r'^register/$', views.register, name='register'),
                        url(r'^login/$', views.auth, name='login'),
-
                        url(r'^enroll/$', views.enroll, name='enroll'),
+                       url(r'^dashboard/(?P<username>\S+)/$', views.dashboard, name='dashboard'),
 
 )
 
