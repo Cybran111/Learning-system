@@ -8,7 +8,7 @@
         {% if user.is_authenticated %}
 
                 <p class="navbar-text"> Signed in as
-                    <a class="navbar-link" href="{% url "dashboard:dashboard" user %}"> {{ user }}</a>
+                    <a id="user-dashboard" class="navbar-link" href="{% url "dashboard:dashboard" user %}"> {{ user }}</a>
                 </p>
                 <a type="button" class="btn btn-default navbar-btn">Log out</a>
             </div>

@@ -3,8 +3,8 @@
 {% for course in enrolled %}
 
 
-    <div class="list-group">
-            <a href="{% url "courses:course_page" course.id %}" class="list-group-item">
+    <div id="enrolled-courses" class="list-group">
+            <a href="{% url "courses:course_page" course.id %}" class="list-group-item course-item">
                 <img src="{{ media }}{{ course.img }}" class="img-rounded" height="50" width="50">
                 <h4>{{ course.title }}</h4>
                 <h5>{{ course.short_description }}</h5>
