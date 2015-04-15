@@ -44,7 +44,11 @@ class UserInteractionTest(TestCase):
         self.client.post('/dashboard/login/', {'username': 'john', "password": "johnpassword"})
         self.assertEqual(int(self.client.session[SESSION_KEY]), user.pk)
 
+    def test_login_deny_with_bad_cred(self):
+        self.client.post('/dashboard/login/', {'username': 'john', "password": "johnpassword"})
+        self.assertNotIn(SESSION_KEY, self.client.session)
 
-def test_login_deny_with_bad_cred(self):
-    self.client.post('/dashboard/login/', {'username': 'john', "password": "johnpassword"})
-    self.assertNotIn(SESSION_KEY, self.client.session)
+    def test_user_dashboard_exists(self):
+        User.objects.create_user('john', 'john@lennon.com', 'johnpassword')
+        response = self.client.get('/dashboard/john/')
+        self.assertTemplateUsed(response, "dashboard.html")
