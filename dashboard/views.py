@@ -61,4 +61,5 @@ def register(request):
 
 
 def dashboard(request, username):
-    return render(request, 'homepage.html')
+    enrolled = Course.objects.filter(profile=User.objects.get(username=username).profile).all()
+    return render(request, 'dashboard.html', {"enrolled": enrolled})
