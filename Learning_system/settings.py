@@ -65,9 +65,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'E_Learning_system.urls'
+ROOT_URLCONF = 'Learning_system.urls'
 
-WSGI_APPLICATION = 'E_Learning_system.wsgi.application'
+WSGI_APPLICATION = 'Learning_system.wsgi.application'
 
 
 # Database
