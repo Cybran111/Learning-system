@@ -32,7 +32,7 @@ class NewStudentTest(FunctionalTest):
         course_short_description = course.find_element_by_tag_name("h5").text
         course.click()
 
-        # And she is at the course page with nice full description
+        # And she at the course page with nice full description
         self.assertEqual(self.browser.title, course_title + " - E-Learning System")
         self.assertIn(course_title, self.browser.page_source)
         self.assertIn(course_short_description, self.browser.page_source)
