@@ -16,3 +16,4 @@ selenium==2.45.0
 sh==1.11
 six==1.9.0
 static3==0.5.1
+whitenoise==1.0.6
