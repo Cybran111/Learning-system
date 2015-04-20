@@ -113,5 +113,6 @@ target/
 
 # Database
 db.sqlite3
+static/
 
-static
+!courses/static

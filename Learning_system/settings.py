@@ -22,9 +22,9 @@ SECRET_KEY = 't96(n&am6qbd@&hq8y&)^+19t91=un6fq*bpjwdrc3ksa3gyd)'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DJANGO_DEBUG' in os.environ
+DEBUG = 'DJANGO_PROD' in os.environ
 
-TEMPLATE_DEBUG = 'DJANGO_DEBUG' in os.environ
+TEMPLATE_DEBUG = 'DJANGO_PROD' in os.environ
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,17 +81,13 @@ WSGI_APPLICATION = 'Learning_system.wsgi.application'
 DATABASES = dict()
 
 # Production/debug databases
-if "DJANGO_DEBUG" in os.environ:
-    DATABASES['default'] = {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-            }
-
-else:
+if "DJANGO_PROD" in os.environ:
     DATABASES['default'] = dj_database_url.config()
-
     # Enable Connection Pooling
     DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
+else:
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
