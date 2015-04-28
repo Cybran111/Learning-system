@@ -48,7 +48,7 @@ class DashboardTest(TestCase):
         user = User.objects.create_user('john', 'john@lennon.com', 'johnpassword')
         Profile.objects.create(user=user)
         response = self.client.get('/dashboard/john/')
-        self.assertTemplateUsed(response, "dashboard.html")
+        self.assertTemplateUsed(response, "dashboard/dashboard.html")
 
     def test_shows_correct_courses(self):
         user = User.objects.create_user('john', 'john@lennon.com', 'johnpassword')
@@ -59,5 +59,5 @@ class DashboardTest(TestCase):
         courses = Course.objects.filter(profile=user.profile)
         response = self.client.get('/dashboard/john/')
 
-        self.assertTemplateUsed(response, "dashboard.html")
+        self.assertTemplateUsed(response, "dashboard/dashboard.html")
         self.assertEqual(list(courses), list(response.context["enrolled"]))

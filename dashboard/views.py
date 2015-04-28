@@ -9,6 +9,9 @@ from dashboard.forms import LoginForm, RegisterForm
 from dashboard.models import Status, Profile
 
 
+def home_page(request):
+    return render(request, 'dashboard/homepage.html', {"courses": Course.objects.all()})
+
 @require_POST
 def enroll(request):
     course = Course.objects.get(pk=request.POST['course'])
@@ -33,7 +36,7 @@ def auth(request):
 
     else:
         form = LoginForm()
-    return render(request, 'login.html', {"form": form})
+    return render(request, 'dashboard/login.html', {"form": form})
 
 
 def register(request):
@@ -57,9 +60,9 @@ def register(request):
     else:
         form = RegisterForm()
 
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'dashboard/register.html', {'form': form})
 
 
 def dashboard(request, username):
     enrolled = Course.objects.filter(profile=User.objects.get(username=username).profile).all()
-    return render(request, 'dashboard.html', {"enrolled": enrolled})
+    return render(request, 'dashboard/dashboard.html', {"enrolled": enrolled})

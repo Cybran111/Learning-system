@@ -8,7 +8,8 @@ manage_urlpatterns = patterns('courses.views', url(r'^$', "manage_course_view", 
                               url(r'^week/(?P<week_number>\d+)/$', "manage_lecture_view", name='manage_lecture'), )
 
 urlpatterns = patterns('courses.views', url(r'^new$', "create_course_view", name='new_course'),
-                       url(r'^(?P<course_id>\d+)/$', "course_view", name='course_page'),
+                       url(r'^(?P<course_id>\d+)/$', "course_dashboard_view", name='course_dashboard'),
+                       url(r'^(?P<course_id>\d+)/overview/$', "course_overview_view", name='course_overview'),
                        url(r'^(?P<course_id>\d+)/lectures/$', "lecture_list_view", name='lectures'),
                        url(r"^(?P<course_id>\d+)/week/(?P<week_number>\d+)/lecture/(?P<lecture_number>\d+)/$",
                            "lecture_view", name="lecture"),

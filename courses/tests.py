@@ -58,9 +58,9 @@ class CRUDTest(CourseTest):
         self.assertRedirects(response, "/courses/%s/manage/" % (course.id))
         self.assertNotEqual(lectures_count, self.get_lectures_count(week))
 
-    def test_can_get_course_page(self):
+    def test_can_get_course_overview_page(self):
         course = Course.objects.get(pk=PK)
-        response = self.client.get('/courses/%s/' % (course.id))
+        response = self.client.get('/courses/%s/overview/' % (course.id))
 
         self.assertContains(response, escape(course.title))
         self.assertContains(response, escape(course.short_description))
@@ -82,7 +82,7 @@ class ListTest(CourseTest):
     def test_homepage_returns_correct_page_with_list(self):
         response = self.client.get('/')
         courses = Course.objects.all()
-        expected_html = render_to_string('homepage.html', {"courses": courses})
+        expected_html = render_to_string('dashboard/homepage.html', {"courses": courses})
         self.assertEqual(response.content.decode(), expected_html)
 
 
@@ -92,7 +92,7 @@ class SaveCourseTest(TestCase):
 
     def test_redirect_to_coursepage_when_created(self):
         response = self.client.post('/courses/new', data=self.course_data)
-        self.assertRedirects(response, 'courses/1/')
+        self.assertRedirects(response, 'courses/1/overview/')
 
     def test_can_save_new_course(self):
         self.client.post('/courses/new', data=self.course_data, )

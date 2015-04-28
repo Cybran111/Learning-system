@@ -5,13 +5,16 @@ from django.views.decorators.http import require_POST
 from courses.forms import NewCourseForm, NewLectureForm
 from courses.models import Course, Week, Lecture
 
+def course_overview_view(request, course_id):
+    return render(request, 'courses/preview_page.html', {"course": Course.objects.get(pk=course_id)})
 
-def home_page(request):
-    return render(request, 'homepage.html', {"courses": Course.objects.all()})
 
+def course_dashboard_view(request, course_id):
+    if request.user.is_authenticated():
+        pass
 
-def course_view(request, course_id):
-    return render(request, 'course_page.html', {"course": Course.objects.get(pk=course_id)})
+    else:
+        return redirect("courses:course_overview", course_id=course_id)
 
 
 def lecture_view(request, course_id, week_number, lecture_number):
@@ -19,19 +22,19 @@ def lecture_view(request, course_id, week_number, lecture_number):
     week = Week.objects.get(course=course, number=week_number)
     lecture = Lecture.objects.get(week=week, order_id=lecture_number)
 
-    return render(request, 'lecture.html', {'lecture': lecture})
+    return render(request, 'courses/lecture.html', {'lecture': lecture})
 
 
 def lecture_list_view(request, course_id):
     course = Course.objects.get(pk=course_id)
     weeks = Week.objects.filter(course=course)
     # FIXME: code smells
-    return render(request, 'lectures.html', {"course_id": course.id, 'weeks': weeks})
+    return render(request, 'courses/lectures.html', {"course_id": course.id, 'weeks': weeks})
 
 
 def manage_course_view(request, course_id):
     course = Course.objects.get(pk=course_id)
-    return render(request, 'manage.html', {"course": course, 'lectures_by_week': get_lectures(course)})
+    return render(request, 'courses/manage.html', {"course": course, 'lectures_by_week': get_lectures(course)})
 
 
 def create_course_view(request):
@@ -43,10 +46,10 @@ def create_course_view(request):
             new_course.short_description = request.POST['short_desc']
             new_course.full_description = request.POST['full_desc']
             new_course.save()
-            return redirect(reverse('courses:course_page', args=(new_course.id,)))
+            return redirect(reverse('courses:course_overview', args=(new_course.id,)))
     else:
         form = NewCourseForm()
-        return render(request, 'new_course.html', {"new_course_form": form})
+        return render(request, 'courses/new_course.html', {"new_course_form": form})
 
 
 @require_POST
@@ -80,7 +83,7 @@ def manage_lecture_view(request, course_id, week_number):
     else:
         form = NewLectureForm()  # An unbound form
 
-    return render(request, 'new_lecture.html', {'form': form, })
+    return render(request, 'courses/new_lecture.html', {'form': form, })
 
 
 def get_lectures(course):
