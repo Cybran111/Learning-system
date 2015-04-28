@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.utils.crypto import get_random_string
 import os
 import dj_database_url
 
@@ -17,8 +18,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't96(n&am6qbd@&hq8y&)^+19t91=un6fq*bpjwdrc3ksa3gyd)'
+
+chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+
+# Generate a secret key as Django startproject do
+SECRET_KEY = get_random_string(50, chars)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
