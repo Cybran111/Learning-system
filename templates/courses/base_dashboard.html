@@ -1,0 +1,27 @@
+{% extends "common/base_with_navbar.html" %}
+
+{% block additional_static %}
+    {% load static %}
+    <link href="{% static "courses/navbar.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="">Lectures <span class="sr-only">(current)</span></a></li>
+            <li><a href="">Report</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+          </ul>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% block course_content %}
+
+        {% endblock %}
+    </div>
+{% endblock %}

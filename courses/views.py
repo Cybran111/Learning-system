@@ -11,8 +11,7 @@ def course_overview_view(request, course_id):
 
 def course_dashboard_view(request, course_id):
     if request.user.is_authenticated():
-        pass
-
+        return redirect("courses:lectures", course_id=course_id)
     else:
         return redirect("courses:course_overview", course_id=course_id)
 
