@@ -22,9 +22,9 @@ SECRET_KEY = 't96(n&am6qbd@&hq8y&)^+19t91=un6fq*bpjwdrc3ksa3gyd)'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DJANGO_PROD' in os.environ
+DEBUG = 'DJANGO_PROD' not in os.environ
 
-TEMPLATE_DEBUG = 'DJANGO_PROD' in os.environ
+TEMPLATE_DEBUG = 'DJANGO_PROD' not in os.environ
 
 ALLOWED_HOSTS = ['*']
 
