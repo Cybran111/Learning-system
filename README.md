@@ -5,4 +5,6 @@ E Learning system
 =================
 Clone of Open edX
 
-Diploma project
+Thesis project
+
+This branch is temporary (?) until I defended.
