@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from datetime import timedelta
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 from django.utils.crypto import get_random_string
 import os
@@ -140,3 +141,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ASSIGNMENT_FEEDBACK_TIMEOUT = timedelta(minutes=2)

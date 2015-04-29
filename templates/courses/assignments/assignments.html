@@ -25,6 +25,7 @@
                         <div class="assignment-list list-group">
                             {% for assignment  in week.assignment_set.all %}
                                 <a href="{% url "courses:assignments:assignment" course.id week.number assignment.id %}" class="list-group-item">
+                                    <span class="badge">{{ assignment. }}</span>
                                     {{ assignment.title }}
                                 </a>
                             {% endfor %}

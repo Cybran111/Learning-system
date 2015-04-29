@@ -20,7 +20,7 @@ class Feedback(models.Model):
     assignment = models.ForeignKey(Assignment)
     student = models.ForeignKey(User)
     attempt = models.PositiveIntegerField()
-    mark = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    mark = models.IntegerField(null=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
     check_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
