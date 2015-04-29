@@ -1,12 +1,10 @@
 from django.shortcuts import render
 
 # Create your views here.
-from courses.models import Course, Week
+from courses.models import Week
 
 
 def assignments_view(request, course_id):
+    weeks = Week.objects.filter(course=course_id)
 
-    course = Course.objects.get(pk=course_id)
-    weeks = Week.objects.filter(course=course)
-
-    return render(request, "courses/assignments/assignments.html", {"course_id": course.id, 'weeks': weeks})
+    return render(request, "courses/assignments/assignments.html", {'weeks': weeks})

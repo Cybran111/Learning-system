@@ -32,7 +32,6 @@ def do_xextends(parser, token):
                 a, b = i.split('=', 1); a = a.strip(); b = b.strip()
                 keys = list(tokenize.generate_tokens(StringIO.StringIO(a).readline))
                 if keys[0][0] == tokenize.NAME:
-                    # kwargs[str(a)] = parser.compile_filter(b)
                     kwargs[str(a)] = str(b)
                 else:
                     raise ValueError

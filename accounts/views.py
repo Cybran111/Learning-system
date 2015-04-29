@@ -14,7 +14,8 @@ def home_page(request):
     return render(request, 'dashboard/homepage.html', {"courses": Course.objects.all()})
 
 
-@login_required
+# TODO: Should be redirected to the enrolled course
+@login_required(redirect_field_name="/")
 @require_POST
 def enroll(request):
     if not Status.objects.filter(course=request.POST['course'], user=request.user.profile, role="student"):
