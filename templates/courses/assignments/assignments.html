@@ -23,8 +23,8 @@
                     <div class="panel-body">
 
                         <div class="assignment-list list-group">
-                            {% for assignment  in week.assignments_set.all %}
-                                <a href="{% url "courses:assignments:assignment" course_id week.number assignment.id %}" class="list-group-item">
+                            {% for assignment  in week.assignment_set.all %}
+                                <a href="{% url "courses:assignments:assignment" course.id week.number assignment.id %}" class="list-group-item">
                                     {{ assignment.title }}
                                 </a>
                             {% endfor %}

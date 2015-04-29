@@ -1,0 +1,21 @@
+{% load course_tags %}
+{% xextends "courses/base_dashboard.html" with active_tab=assignments %}
+
+
+{% block course_content %}
+    <h4> {{ assignment.title }} </h4>
+    <p> {{ assignment.description }}</p>
+
+
+    <ul class="list-group">
+        {% for feedback in feedbacks %}
+          <li class="list-group-item">
+            <span class="badge">{{ feedback.mark }}</span>
+            Feedback #{{ feedback.attempt }}
+          </li>
+        {% endfor %}
+    </ul>
+    </div>
+
+
+{% endblock %}

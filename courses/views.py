@@ -2,13 +2,19 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
+from accounts.models import Status
 
 from courses.forms import NewCourseForm, NewLectureForm
 from courses.models import Course, Week, Lecture, News, LectureMaterials
 
 
 def course_overview_view(request, course_id):
-    return render(request, 'courses/preview_course.html')
+    is_enrolled = False
+    # FIXME: Code smells
+    if not request.user.is_anonymous() and \
+            Status.objects.filter(course=course_id, user=request.user.profile, role="student"):
+        is_enrolled = True
+    return render(request, 'courses/preview_course.html', {"is_enrolled": is_enrolled})
 
 
 def course_dashboard_view(request, course_id):
