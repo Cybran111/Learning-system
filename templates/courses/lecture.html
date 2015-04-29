@@ -6,4 +6,14 @@
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" id="video" src="{{ lecture.embed_video_url }}"></iframe>
 </div>
+<ul class="list-group">
+    {% for material in materials %}
+        <a href="{{ material.link }}">
+          <li class="list-group-item">
+              {{ material.title }}
+          </li>
+        </a>
+    {% endfor %}
+</ul>
+
 {% endblock %}

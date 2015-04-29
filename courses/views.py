@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
 from courses.forms import NewCourseForm, NewLectureForm
-from courses.models import Course, Week, Lecture, News
+from courses.models import Course, Week, Lecture, News, LectureMaterials
 
 
 def course_overview_view(request, course_id):
@@ -33,8 +33,9 @@ def lecture_view(request, course_id, week_number, lecture_number):
     course = Course.objects.get(pk=course_id)
     week = Week.objects.get(course=course, number=week_number)
     lecture = Lecture.objects.get(week=week, order_id=lecture_number)
+    lecture_materials = LectureMaterials.objects.filter(lecture=lecture)
 
-    return render(request, 'courses/lecture.html', {'lecture': lecture})
+    return render(request, 'courses/lecture.html', {'lecture': lecture, "materials": lecture_materials})
 
 
 @login_required
@@ -42,7 +43,7 @@ def lecture_list_view(request, course_id):
     course = Course.objects.get(pk=course_id)
     weeks = Week.objects.filter(course=course)
     # FIXME: code smells
-    return render(request, 'courses/lectures.html', {"course_id": course.id, 'weeks': weeks})
+    return render(request, 'courses/lectures.html', {'weeks': weeks})
 
 
 def manage_course_view(request, course_id):
@@ -62,8 +63,6 @@ def create_course_view(request):
     else:
         form = NewCourseForm()
         return render(request, 'courses/new_course.html', {"new_course_form": form})
-
-
 
 
 @require_POST
