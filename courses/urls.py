@@ -13,6 +13,9 @@ urlpatterns = patterns('courses.views', url(r'^new$', "create_course_view", name
                        url(r'^(?P<course_id>\d+)/lectures/$', "lecture_list_view", name='lectures'),
                        url(r"^(?P<course_id>\d+)/week/(?P<week_number>\d+)/lecture/(?P<lecture_number>\d+)/$",
                            "lecture_view", name="lecture"),
+                       url(r'^(?P<course_id>\d+)/news/$', "news_view", name='news'),
+
+
                        url(r'^(?P<course_id>\d+)/manage/', include(manage_urlpatterns)),
 
                        url(r'^(?P<course_id>\d+)/assignments/', include('courses.assignments.urls',

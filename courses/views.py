@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
 from courses.forms import NewCourseForm, NewLectureForm
-from courses.models import Course, Week, Lecture
+from courses.models import Course, Week, Lecture, News
 
 
 def course_overview_view(request, course_id):
@@ -13,9 +13,20 @@ def course_overview_view(request, course_id):
 
 def course_dashboard_view(request, course_id):
     if request.user.is_authenticated():
-        return redirect("courses:lectures", course_id=course_id)
+        return redirect("courses:news", course_id=course_id)
     else:
         return redirect("courses:course_overview", course_id=course_id)
+
+
+@login_required
+def news_view(request, course_id):
+    # News.objects.create(title=course_id,
+    #                     text="some text",
+    #                     course=Course.objects.get(pk=course_id)
+    #                     )
+    feed = News.objects.filter(course=course_id).order_by("date_created")
+    return render(request, 'courses/news.html', {"feed": feed})
+
 
 @login_required
 def lecture_view(request, course_id, week_number, lecture_number):
@@ -24,6 +35,7 @@ def lecture_view(request, course_id, week_number, lecture_number):
     lecture = Lecture.objects.get(week=week, order_id=lecture_number)
 
     return render(request, 'courses/lecture.html', {'lecture': lecture})
+
 
 @login_required
 def lecture_list_view(request, course_id):
@@ -50,6 +62,8 @@ def create_course_view(request):
     else:
         form = NewCourseForm()
         return render(request, 'courses/new_course.html', {"new_course_form": form})
+
+
 
 
 @require_POST

@@ -25,7 +25,7 @@ def enroll(request):
                      role="student")
         rel.save()
 
-    return redirect("courses:lectures", (request.POST['course']))
+    return redirect("courses:news", (request.POST['course']))
 
 
 def auth(request):

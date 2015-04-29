@@ -9,6 +9,13 @@ class Course(models.Model):
     full_description = models.TextField(default="")
 
 
+class News(models.Model):
+    course = models.ForeignKey("Course")
+    title = models.TextField()
+    text = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
 class Week(models.Model):
     course = models.ForeignKey("Course")
     number = models.IntegerField("Number of week")
@@ -29,3 +36,9 @@ class Lecture(models.Model):
 
     class Meta:
         unique_together = ('order_id', 'week',)
+
+
+class LectureMaterials(models.Model):
+    lecture = models.ForeignKey("Lecture")
+    title = models.TextField()
+    link = models.URLField()

@@ -1,6 +1,7 @@
 {% load course_tags %}
 {% xextends "courses/base_dashboard.html" with active_tab=lectures %}
 
+
 {% block course_content %}
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" id="video" src="{{ lecture.embed_video_url }}"></iframe>

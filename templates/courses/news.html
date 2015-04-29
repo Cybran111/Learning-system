@@ -1,0 +1,17 @@
+{% load course_tags %}
+{% xextends "courses/base_dashboard.html" with active_tab=news %}
+
+{% block course_content %}
+    <div>
+    {% for entry in feed %}
+        <div class="blog-post">
+            <h2>{{ entry.title }}</h2>
+            <p>{{ entry.text }}</p>
+            <small>{{ entry.date_created }}</small>
+        </div>
+    {% empty %}
+        <p>Sorry, no news here.</p>
+    {% endfor %}
+
+    </div>
+{% endblock %}
