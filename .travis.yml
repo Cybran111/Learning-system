@@ -9,7 +9,6 @@ before_install:
 # command to install dependencies
 install:
   - "pip install -r requirements.txt"
-  - "python manage.py syncdb --noinput"
 # command to run tests
 script:
   - "coverage run --source='.' -p manage.py test courses accounts"
