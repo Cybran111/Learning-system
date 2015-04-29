@@ -10,7 +10,7 @@ before_install:
 install: pip install -r requirements.txt
 # command to run tests
 script:
-  - "coverage run --source='.' -p manage.py test courses dashboard"
+  - "coverage run --source='.' -p manage.py test courses accounts"
   - "coverage run --source='.' -p manage.py test functional_tests"
 
 after_success:

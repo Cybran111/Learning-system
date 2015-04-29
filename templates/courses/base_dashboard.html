@@ -7,12 +7,15 @@
 
 {% block content %}
     <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="">Lectures <span class="sr-only">(current)</span></a></li>
-            <li><a href="">Report</a></li>
+        <ul class="nav nav-sidebar">
+            <li class="{% if active_tab == "lectures" %} active {% endif %} ">
+                <a href="{% url "courses:lectures" course.id %}">Lectures</a>
+            </li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
+            <li class="{% if active_tab == "assignments" %} active {% endif %} ">
+                <a href="{% url "courses:assignments:assignments" course.id %}">Assignments</a>
+            </li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Nav item again</a></li>

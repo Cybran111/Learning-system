@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('role', models.CharField(max_length=15)),
                 ('course', models.ForeignKey(to='courses.Course')),
-                ('user', models.ForeignKey(to='dashboard.Profile')),
+                ('user', models.ForeignKey(to='accounts.Profile')),
             ],
             options={
             },
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='courses',
-            field=models.ManyToManyField(to='courses.Course', through='dashboard.Status'),
+            field=models.ManyToManyField(to='courses.Course', through='accounts.Status'),
             preserve_default=True,
         ),
         migrations.AddField(

@@ -52,8 +52,8 @@ class NewStudentTest(FunctionalTest):
         # She watching the video lecture with pleasure
         self.browser.find_element_by_id("video")
 
-        # When she finished watching, she goes to her dashboard to see that she enrolled to this course
-        self.browser.find_element_by_id("user-dashboard").click()
+        # When she finished watching, she goes to her accounts to see that she enrolled to this course
+        self.browser.find_element_by_id("user-accounts").click()
 
         enrolled_list = self.browser.find_element_by_id("enrolled-courses")
         enrolled_course = enrolled_list.find_element_by_class_name("course-item")

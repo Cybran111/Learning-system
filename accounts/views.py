@@ -1,26 +1,30 @@
 # Create your views here.
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from courses.models import Course
-from dashboard.forms import LoginForm, RegisterForm
-from dashboard.models import Status, Profile
+from accounts.forms import LoginForm, RegisterForm
+from accounts.models import Status, Profile
 
 
 def home_page(request):
     return render(request, 'dashboard/homepage.html', {"courses": Course.objects.all()})
 
+
+@login_required
 @require_POST
 def enroll(request):
-    course = Course.objects.get(pk=request.POST['course'])
+    if not Status.objects.filter(course=request.POST['course'], user=request.user.profile, role="student"):
+        course = Course.objects.get(pk=request.POST['course'])
 
-    rel = Status(course=course, user=request.user.profile,
-                 role="student")
-    rel.save()
+        rel = Status(course=course, user=request.user.profile,
+                     role="student")
+        rel.save()
 
-    return redirect("courses:lectures", (course.id))
+    return redirect("courses:lectures", (request.POST['course']))
 
 
 def auth(request):
@@ -63,6 +67,6 @@ def register(request):
     return render(request, 'dashboard/register.html', {'form': form})
 
 
-def dashboard(request, username):
-    enrolled = Course.objects.filter(profile=User.objects.get(username=username).profile).all()
+def profile(request):
+    enrolled = Course.objects.filter(profile=request.user.profile).all()
     return render(request, 'dashboard/dashboard.html', {"enrolled": enrolled})

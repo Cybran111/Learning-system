@@ -1,5 +1,6 @@
+
 {% load course_tags %}
-{% xextends "courses/base_dashboard.html" with active_tab=lectures %}
+{% xextends "courses/base_dashboard.html" with active_tab=assignments %}
 
 {% block course_content %}
     <div class="panel-group" id="weeks-list" role="tablist" aria-multiselectable="true">
@@ -21,10 +22,10 @@
                      aria-labelledby="heading{{ week.number }}">
                     <div class="panel-body">
 
-                        <div class="lecture-list list-group">
-                            {% for lecture  in week.lecture_set.all %}
-                                <a href="{% url "courses:lecture" course_id week.number lecture.order_id %}" class="list-group-item">
-                                    {{ lecture.title }}
+                        <div class="assignment-list list-group">
+                            {% for assignment  in week.assignments_set.all %}
+                                <a href="{% url "courses:assignments:assignment" course_id week.number assignment.id %}" class="list-group-item">
+                                    {{ assignment.title }}
                                 </a>
                             {% endfor %}
 

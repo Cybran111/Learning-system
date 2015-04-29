@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -5,8 +6,9 @@ from django.views.decorators.http import require_POST
 from courses.forms import NewCourseForm, NewLectureForm
 from courses.models import Course, Week, Lecture
 
+
 def course_overview_view(request, course_id):
-    return render(request, 'courses/preview_page.html', {"course": Course.objects.get(pk=course_id)})
+    return render(request, 'courses/preview_course.html')
 
 
 def course_dashboard_view(request, course_id):
@@ -15,7 +17,7 @@ def course_dashboard_view(request, course_id):
     else:
         return redirect("courses:course_overview", course_id=course_id)
 
-
+@login_required
 def lecture_view(request, course_id, week_number, lecture_number):
     course = Course.objects.get(pk=course_id)
     week = Week.objects.get(course=course, number=week_number)
@@ -23,7 +25,7 @@ def lecture_view(request, course_id, week_number, lecture_number):
 
     return render(request, 'courses/lecture.html', {'lecture': lecture})
 
-
+@login_required
 def lecture_list_view(request, course_id):
     course = Course.objects.get(pk=course_id)
     weeks = Week.objects.filter(course=course)
@@ -32,8 +34,7 @@ def lecture_list_view(request, course_id):
 
 
 def manage_course_view(request, course_id):
-    course = Course.objects.get(pk=course_id)
-    return render(request, 'courses/manage.html', {"course": course, 'lectures_by_week': get_lectures(course)})
+    return render(request, 'courses/manage.html', {'lectures_by_week': get_lectures(course_id)})
 
 
 def create_course_view(request):
@@ -85,6 +86,6 @@ def manage_lecture_view(request, course_id, week_number):
     return render(request, 'courses/new_lecture.html', {'form': form, })
 
 
-def get_lectures(course):
-    lectures = (Lecture.objects.filter(week=week) for week in Week.objects.filter(course=course))
+def get_lectures(course_id):
+    lectures = (Lecture.objects.filter(week=week) for week in Week.objects.filter(course=course_id))
     return lectures

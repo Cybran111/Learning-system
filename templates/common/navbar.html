@@ -8,13 +8,13 @@
         {% if user.is_authenticated %}
 
                 <p class="navbar-text"> Signed in as
-                    <a id="user-dashboard" class="navbar-link" href="{% url "dashboard:dashboard" user %}"> {{ user }}</a>
+                    <a id="user-dashboard" class="navbar-link" href="{% url "accounts:profile" %}"> {{ user }}</a>
                 </p>
-                <a type="button" class="btn btn-default navbar-btn">Log out</a>
+                <a type="button" href="{% url "accounts:logout" %}" class="btn btn-default navbar-btn">Log out</a>
             </div>
         {% else %}
                 <p class="navbar-text">You are not signed in</p>
-                <a href="{% url "dashboard:login" %}" type="button" class="btn btn-default navbar-btn">Sign in</a>
+                <a href="{% url "accounts:login" %}" type="button" class="btn btn-default navbar-btn">Sign in</a>
         {% endif %}
     </div>
 </nav>

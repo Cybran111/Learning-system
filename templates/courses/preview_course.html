@@ -6,12 +6,11 @@
     <h3>{{ course.short_description }}</h3>
     <div id="full-desc"> {{ course.full_description }}</div>
 
-    <form action="{% url "dashboard:enroll" %}" method="post">
+    <form action="{% url "accounts:enroll" %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="course" value="{{ course.id }}">
         <input id="enroll" class="btn btn-primary btn-lg" type="submit" value="Enroll">
     </form>
 
-    <a id="lecture-page" href="{% url "courses:lectures" course.id %}">Go to the lecture list</a>
     <a id="manage-course" href="{% url "courses:manage" course.id %}">Manage a course list</a>
 {% endblock %}

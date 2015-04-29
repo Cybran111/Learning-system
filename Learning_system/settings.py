@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 from django.utils.crypto import get_random_string
 import os
 import dj_database_url
@@ -47,7 +48,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
     'courses',
-    'dashboard',
+    'accounts',
+    'courses.assignments',
 )
 
 # TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -72,6 +74,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'courses.middleware.CourseMiddleware',
+
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    # 'django.template.context_processors.request',
+    "courses.context_procs.course_info",
 )
 
 ROOT_URLCONF = 'Learning_system.urls'
