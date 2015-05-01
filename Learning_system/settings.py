@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'courses',
     'accounts',
     'courses.assignments',
+    'courses.assessments',
 )
 
 # TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

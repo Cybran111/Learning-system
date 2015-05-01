@@ -15,6 +15,10 @@
                 <a href="{% url "courses:lectures" course.id %}">Lectures</a>
             </li>
 
+            <li class="{% if active_tab == "assessments" %} active {% endif %} ">
+                <a href="{% url "courses:assessments:assessments" course.id %}">Assessments</a>
+            </li>
+
             <li class="{% if active_tab == "assignments" %} active {% endif %} ">
                 <a href="{% url "courses:assignments:assignments" course.id %}">Assignments</a>
             </li>

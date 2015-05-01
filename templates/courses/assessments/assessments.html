@@ -1,6 +1,6 @@
 
 {% load course_tags %}
-{% xextends "courses/base_dashboard.html" with active_tab=assignments %}
+{% xextends "courses/base_dashboard.html" with active_tab=assessment %}
 
 {% block course_content %}
     <div class="panel-group" id="weeks-list" role="tablist" aria-multiselectable="true">
@@ -22,11 +22,11 @@
                      aria-labelledby="heading{{ week.number }}">
                     <div class="panel-body">
 
-                        <div class="assignment-list list-group">
-                            {% for assignment  in week.assignment_set.all %}
-                                <a href="{% url "courses:assignments:assignment" course.id week.number assignment.id %}" class="list-group-item">
-                                    <span class="badge">{{ assignment.mark }}</span>
-                                    {{ assignment.title }}
+                        <div class="assessment-list list-group">
+                            {% for assessment  in week.assessment_set.all %}
+                                <a href="{% url "courses:assessments:assessment" course.id week.number assessment.id %}" class="list-group-item">
+                                    <span class="badge">{{ assignment. }}</span>
+                                    {{ assessment.title }}
                                 </a>
                             {% endfor %}
 
