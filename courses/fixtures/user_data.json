@@ -1,0 +1,948 @@
+[
+{
+    "fields": {
+        "model": "logentry",
+        "app_label": "admin"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 1
+},
+{
+    "fields": {
+        "model": "permission",
+        "app_label": "auth"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 2
+},
+{
+    "fields": {
+        "model": "group",
+        "app_label": "auth"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 3
+},
+{
+    "fields": {
+        "model": "user",
+        "app_label": "auth"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 4
+},
+{
+    "fields": {
+        "model": "contenttype",
+        "app_label": "contenttypes"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 5
+},
+{
+    "fields": {
+        "model": "session",
+        "app_label": "sessions"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 6
+},
+{
+    "fields": {
+        "model": "course",
+        "app_label": "courses"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 7
+},
+{
+    "fields": {
+        "model": "news",
+        "app_label": "courses"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 8
+},
+{
+    "fields": {
+        "model": "week",
+        "app_label": "courses"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 9
+},
+{
+    "fields": {
+        "model": "lecture",
+        "app_label": "courses"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 10
+},
+{
+    "fields": {
+        "model": "lecturematerials",
+        "app_label": "courses"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 11
+},
+{
+    "fields": {
+        "model": "profile",
+        "app_label": "accounts"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 12
+},
+{
+    "fields": {
+        "model": "status",
+        "app_label": "accounts"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 13
+},
+{
+    "fields": {
+        "model": "assignment",
+        "app_label": "assignments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 14
+},
+{
+    "fields": {
+        "model": "feedback",
+        "app_label": "assignments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 15
+},
+{
+    "fields": {
+        "model": "questionset",
+        "app_label": "assessments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 16
+},
+{
+    "fields": {
+        "model": "question",
+        "app_label": "assessments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 17
+},
+{
+    "fields": {
+        "model": "possibleanswer",
+        "app_label": "assessments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 18
+},
+{
+    "fields": {
+        "model": "studentanswerset",
+        "app_label": "assessments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 19
+},
+{
+    "fields": {
+        "model": "studentanswer",
+        "app_label": "assessments"
+    },
+    "model": "contenttypes.contenttype",
+    "pk": 20
+},
+{
+    "fields": {
+        "expire_date": "2015-05-19T06:53:38.248Z",
+        "session_data": "NWM3OTM4OTVjNTAxNTM2ZjVjODZlMWNhMzRmNjNkN2IxZTkyYTVlMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjU2YThjYmU0MjE4ZmU4MzM1NzhmMDZjYWY3YjhlZWFlOTc2OWYxMzQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
+    },
+    "model": "sessions.session",
+    "pk": "1tu2ajqaxmblge6fkver7cmgpz6fd03v"
+},
+{
+    "fields": {
+        "short_description": "Aliquam vitae orci tincidunt, mattis orci sit amet, condimentum turpis. Donec volutpat felis quis mollis.",
+        "full_description": "Maecenas porttitor at ante feugiat posuere. Praesent vel elit et ligula laoreet maximus in sed nunc. Maecenas sit amet pharetra purus, et auctor ex. In commodo, tortor a aliquam feugiat, nulla justo rutrum elit, ut blandit diam ipsum ac risus? Nunc vitae magna a magna dapibus consequat. Nam vestibulum ac nulla id convallis. Nullam sed aliquam massa, in malesuada mauris. Nunc a mi vel risus imperdiet volutpat! Curabitur eu arcu quam.\r\n\r\nNulla fringilla dictum quam porttitor varius. Nullam tempus ante sit amet efficitur mattis. Sed convallis; nibh interdum efficitur condimentum, metus dui fermentum arcu, vitae molestie dui augue et felis. Fusce sit amet mi eu augue ultrices hendrerit a in sapien! Mauris convallis vestibulum sapien, eget suscipit augue pellentesque ac. Nunc egestas odio quis tellus aliquam sollicitudin! Fusce turpis velit; blandit quis libero et, facilisis congue nibh. Fusce ac nisl purus?",
+        "img": "../media/courses/default.png",
+        "title": "Nulla mollis neque eget lorem"
+    },
+    "model": "courses.course",
+    "pk": 1
+},
+{
+    "fields": {
+        "short_description": "Fusce eget porta lacus. Proin tincidunt metus urna, vitae rutrum metus imperdiet non. Aliquam erat.",
+        "full_description": "Vestibulum rutrum sit amet nulla in laoreet. Duis porta accumsan tortor eget commodo. Duis tempus diam in mauris maximus, ut vehicula erat iaculis. Donec ornare lectus ligula, sed venenatis neque dapibus eu. Proin sem neque, iaculis sed faucibus eu, fringilla nec urna. Sed vitae felis tempor, dignissim magna ut, venenatis arcu. Duis lorem odio; congue nec consequat eget, euismod nec ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget velit vestibulum dolor convallis imperdiet! Etiam purus nunc, convallis varius placerat sit amet, iaculis sed eros. Pellentesque vitae est ultrices lorem ultrices mollis imperdiet et nibh. Nulla semper aliquet pulvinar. Aliquam accumsan lacus purus; at cursus ex pulvinar at. Quisque a convallis ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\r\n\r\nEtiam vulputate quam magna, nec lacinia erat bibendum ut. Nulla ac varius leo. Maecenas et consectetur ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis at nisl sed nulla condimentum commodo. Praesent tempus dolor ac tortor molestie, eu fermentum tellus elementum. Praesent ullamcorper leo vel felis tincidunt, in rutrum orci convallis. Nam sodales convallis dui, pharetra varius justo finibus sed? Sed dignissim varius sem, sit amet vehicula leo posuere id.",
+        "img": "../media/courses/default.png",
+        "title": "Phasellus sodales odio ut tempus."
+    },
+    "model": "courses.course",
+    "pk": 2
+},
+{
+    "fields": {
+        "course": 1,
+        "number": 1
+    },
+    "model": "courses.week",
+    "pk": 1
+},
+{
+    "fields": {
+        "course": 1,
+        "number": 2
+    },
+    "model": "courses.week",
+    "pk": 2
+},
+{
+    "fields": {
+        "course": 1,
+        "number": 3
+    },
+    "model": "courses.week",
+    "pk": 3
+},
+{
+    "fields": {
+        "course": 2,
+        "number": 1
+    },
+    "model": "courses.week",
+    "pk": 4
+},
+{
+    "fields": {
+        "course": 2,
+        "number": 2
+    },
+    "model": "courses.week",
+    "pk": 5
+},
+{
+    "fields": {
+        "order_id": 1,
+        "week": 1,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Cum fiscina velum, omnes classises desiderium azureus, ferox decores."
+    },
+    "model": "courses.lecture",
+    "pk": 1
+},
+{
+    "fields": {
+        "order_id": 2,
+        "week": 1,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Cum cedrium velum, omnes itineris tramitemes promissio dexter, brevis galataees."
+    },
+    "model": "courses.lecture",
+    "pk": 2
+},
+{
+    "fields": {
+        "order_id": 1,
+        "week": 2,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Cum extum velum, omnes contencioes experientia germanus, lotus plasmatores."
+    },
+    "model": "courses.lecture",
+    "pk": 3
+},
+{
+    "fields": {
+        "order_id": 2,
+        "week": 2,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Assimilatios sunt ventuss de raptus axona."
+    },
+    "model": "courses.lecture",
+    "pk": 4
+},
+{
+    "fields": {
+        "order_id": 1,
+        "week": 3,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Secundus, lotus cobaltums absolute amor de grandis, magnum amicitia."
+    },
+    "model": "courses.lecture",
+    "pk": 5
+},
+{
+    "fields": {
+        "order_id": 2,
+        "week": 3,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Heu."
+    },
+    "model": "courses.lecture",
+    "pk": 6
+},
+{
+    "fields": {
+        "order_id": 1,
+        "week": 4,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Cur adelphis persuadere?"
+    },
+    "model": "courses.lecture",
+    "pk": 7
+},
+{
+    "fields": {
+        "order_id": 2,
+        "week": 4,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Cur era accelerare?"
+    },
+    "model": "courses.lecture",
+    "pk": 8
+},
+{
+    "fields": {
+        "order_id": 1,
+        "week": 5,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Est brevis deus, cesaris."
+    },
+    "model": "courses.lecture",
+    "pk": 9
+},
+{
+    "fields": {
+        "order_id": 2,
+        "week": 5,
+        "embed_video_url": "https://www.youtube.com/embed/lgZBsWGaQY0",
+        "video_url": "https://www.youtube.com/watch?v=lXn7XKLA6Vg",
+        "title": "Camerarius torquis etiam perderes hilotae est."
+    },
+    "model": "courses.lecture",
+    "pk": 10
+},
+{
+    "fields": {
+        "course": 1,
+        "role": "student",
+        "user": 1
+    },
+    "model": "accounts.status",
+    "pk": 1
+},
+{
+    "fields": {
+        "course": 2,
+        "role": "student",
+        "user": 1
+    },
+    "model": "accounts.status",
+    "pk": 2
+},
+{
+    "fields": {
+        "week": 1,
+        "checker_url": "http://localhost:5000",
+        "description": "Lalaleila",
+        "title": "Test",
+        "number": 1,
+        "course": 1
+    },
+    "model": "assignments.assignment",
+    "pk": 1
+},
+{
+    "fields": {
+        "codename": "add_logentry",
+        "name": "Can add log entry",
+        "content_type": 1
+    },
+    "model": "auth.permission",
+    "pk": 1
+},
+{
+    "fields": {
+        "codename": "change_logentry",
+        "name": "Can change log entry",
+        "content_type": 1
+    },
+    "model": "auth.permission",
+    "pk": 2
+},
+{
+    "fields": {
+        "codename": "delete_logentry",
+        "name": "Can delete log entry",
+        "content_type": 1
+    },
+    "model": "auth.permission",
+    "pk": 3
+},
+{
+    "fields": {
+        "codename": "add_permission",
+        "name": "Can add permission",
+        "content_type": 2
+    },
+    "model": "auth.permission",
+    "pk": 4
+},
+{
+    "fields": {
+        "codename": "change_permission",
+        "name": "Can change permission",
+        "content_type": 2
+    },
+    "model": "auth.permission",
+    "pk": 5
+},
+{
+    "fields": {
+        "codename": "delete_permission",
+        "name": "Can delete permission",
+        "content_type": 2
+    },
+    "model": "auth.permission",
+    "pk": 6
+},
+{
+    "fields": {
+        "codename": "add_group",
+        "name": "Can add group",
+        "content_type": 3
+    },
+    "model": "auth.permission",
+    "pk": 7
+},
+{
+    "fields": {
+        "codename": "change_group",
+        "name": "Can change group",
+        "content_type": 3
+    },
+    "model": "auth.permission",
+    "pk": 8
+},
+{
+    "fields": {
+        "codename": "delete_group",
+        "name": "Can delete group",
+        "content_type": 3
+    },
+    "model": "auth.permission",
+    "pk": 9
+},
+{
+    "fields": {
+        "codename": "add_user",
+        "name": "Can add user",
+        "content_type": 4
+    },
+    "model": "auth.permission",
+    "pk": 10
+},
+{
+    "fields": {
+        "codename": "change_user",
+        "name": "Can change user",
+        "content_type": 4
+    },
+    "model": "auth.permission",
+    "pk": 11
+},
+{
+    "fields": {
+        "codename": "delete_user",
+        "name": "Can delete user",
+        "content_type": 4
+    },
+    "model": "auth.permission",
+    "pk": 12
+},
+{
+    "fields": {
+        "codename": "add_contenttype",
+        "name": "Can add content type",
+        "content_type": 5
+    },
+    "model": "auth.permission",
+    "pk": 13
+},
+{
+    "fields": {
+        "codename": "change_contenttype",
+        "name": "Can change content type",
+        "content_type": 5
+    },
+    "model": "auth.permission",
+    "pk": 14
+},
+{
+    "fields": {
+        "codename": "delete_contenttype",
+        "name": "Can delete content type",
+        "content_type": 5
+    },
+    "model": "auth.permission",
+    "pk": 15
+},
+{
+    "fields": {
+        "codename": "add_session",
+        "name": "Can add session",
+        "content_type": 6
+    },
+    "model": "auth.permission",
+    "pk": 16
+},
+{
+    "fields": {
+        "codename": "change_session",
+        "name": "Can change session",
+        "content_type": 6
+    },
+    "model": "auth.permission",
+    "pk": 17
+},
+{
+    "fields": {
+        "codename": "delete_session",
+        "name": "Can delete session",
+        "content_type": 6
+    },
+    "model": "auth.permission",
+    "pk": 18
+},
+{
+    "fields": {
+        "codename": "add_course",
+        "name": "Can add course",
+        "content_type": 7
+    },
+    "model": "auth.permission",
+    "pk": 19
+},
+{
+    "fields": {
+        "codename": "change_course",
+        "name": "Can change course",
+        "content_type": 7
+    },
+    "model": "auth.permission",
+    "pk": 20
+},
+{
+    "fields": {
+        "codename": "delete_course",
+        "name": "Can delete course",
+        "content_type": 7
+    },
+    "model": "auth.permission",
+    "pk": 21
+},
+{
+    "fields": {
+        "codename": "add_news",
+        "name": "Can add news",
+        "content_type": 8
+    },
+    "model": "auth.permission",
+    "pk": 22
+},
+{
+    "fields": {
+        "codename": "change_news",
+        "name": "Can change news",
+        "content_type": 8
+    },
+    "model": "auth.permission",
+    "pk": 23
+},
+{
+    "fields": {
+        "codename": "delete_news",
+        "name": "Can delete news",
+        "content_type": 8
+    },
+    "model": "auth.permission",
+    "pk": 24
+},
+{
+    "fields": {
+        "codename": "add_week",
+        "name": "Can add week",
+        "content_type": 9
+    },
+    "model": "auth.permission",
+    "pk": 25
+},
+{
+    "fields": {
+        "codename": "change_week",
+        "name": "Can change week",
+        "content_type": 9
+    },
+    "model": "auth.permission",
+    "pk": 26
+},
+{
+    "fields": {
+        "codename": "delete_week",
+        "name": "Can delete week",
+        "content_type": 9
+    },
+    "model": "auth.permission",
+    "pk": 27
+},
+{
+    "fields": {
+        "codename": "add_lecture",
+        "name": "Can add lecture",
+        "content_type": 10
+    },
+    "model": "auth.permission",
+    "pk": 28
+},
+{
+    "fields": {
+        "codename": "change_lecture",
+        "name": "Can change lecture",
+        "content_type": 10
+    },
+    "model": "auth.permission",
+    "pk": 29
+},
+{
+    "fields": {
+        "codename": "delete_lecture",
+        "name": "Can delete lecture",
+        "content_type": 10
+    },
+    "model": "auth.permission",
+    "pk": 30
+},
+{
+    "fields": {
+        "codename": "add_lecturematerials",
+        "name": "Can add lecture materials",
+        "content_type": 11
+    },
+    "model": "auth.permission",
+    "pk": 31
+},
+{
+    "fields": {
+        "codename": "change_lecturematerials",
+        "name": "Can change lecture materials",
+        "content_type": 11
+    },
+    "model": "auth.permission",
+    "pk": 32
+},
+{
+    "fields": {
+        "codename": "delete_lecturematerials",
+        "name": "Can delete lecture materials",
+        "content_type": 11
+    },
+    "model": "auth.permission",
+    "pk": 33
+},
+{
+    "fields": {
+        "codename": "add_profile",
+        "name": "Can add profile",
+        "content_type": 12
+    },
+    "model": "auth.permission",
+    "pk": 34
+},
+{
+    "fields": {
+        "codename": "change_profile",
+        "name": "Can change profile",
+        "content_type": 12
+    },
+    "model": "auth.permission",
+    "pk": 35
+},
+{
+    "fields": {
+        "codename": "delete_profile",
+        "name": "Can delete profile",
+        "content_type": 12
+    },
+    "model": "auth.permission",
+    "pk": 36
+},
+{
+    "fields": {
+        "codename": "add_status",
+        "name": "Can add status",
+        "content_type": 13
+    },
+    "model": "auth.permission",
+    "pk": 37
+},
+{
+    "fields": {
+        "codename": "change_status",
+        "name": "Can change status",
+        "content_type": 13
+    },
+    "model": "auth.permission",
+    "pk": 38
+},
+{
+    "fields": {
+        "codename": "delete_status",
+        "name": "Can delete status",
+        "content_type": 13
+    },
+    "model": "auth.permission",
+    "pk": 39
+},
+{
+    "fields": {
+        "codename": "add_assignment",
+        "name": "Can add assignment",
+        "content_type": 14
+    },
+    "model": "auth.permission",
+    "pk": 40
+},
+{
+    "fields": {
+        "codename": "change_assignment",
+        "name": "Can change assignment",
+        "content_type": 14
+    },
+    "model": "auth.permission",
+    "pk": 41
+},
+{
+    "fields": {
+        "codename": "delete_assignment",
+        "name": "Can delete assignment",
+        "content_type": 14
+    },
+    "model": "auth.permission",
+    "pk": 42
+},
+{
+    "fields": {
+        "codename": "add_feedback",
+        "name": "Can add feedback",
+        "content_type": 15
+    },
+    "model": "auth.permission",
+    "pk": 43
+},
+{
+    "fields": {
+        "codename": "change_feedback",
+        "name": "Can change feedback",
+        "content_type": 15
+    },
+    "model": "auth.permission",
+    "pk": 44
+},
+{
+    "fields": {
+        "codename": "delete_feedback",
+        "name": "Can delete feedback",
+        "content_type": 15
+    },
+    "model": "auth.permission",
+    "pk": 45
+},
+{
+    "fields": {
+        "codename": "add_questionset",
+        "name": "Can add question set",
+        "content_type": 16
+    },
+    "model": "auth.permission",
+    "pk": 46
+},
+{
+    "fields": {
+        "codename": "change_questionset",
+        "name": "Can change question set",
+        "content_type": 16
+    },
+    "model": "auth.permission",
+    "pk": 47
+},
+{
+    "fields": {
+        "codename": "delete_questionset",
+        "name": "Can delete question set",
+        "content_type": 16
+    },
+    "model": "auth.permission",
+    "pk": 48
+},
+{
+    "fields": {
+        "codename": "add_question",
+        "name": "Can add question",
+        "content_type": 17
+    },
+    "model": "auth.permission",
+    "pk": 49
+},
+{
+    "fields": {
+        "codename": "change_question",
+        "name": "Can change question",
+        "content_type": 17
+    },
+    "model": "auth.permission",
+    "pk": 50
+},
+{
+    "fields": {
+        "codename": "delete_question",
+        "name": "Can delete question",
+        "content_type": 17
+    },
+    "model": "auth.permission",
+    "pk": 51
+},
+{
+    "fields": {
+        "codename": "add_possibleanswer",
+        "name": "Can add possible answer",
+        "content_type": 18
+    },
+    "model": "auth.permission",
+    "pk": 52
+},
+{
+    "fields": {
+        "codename": "change_possibleanswer",
+        "name": "Can change possible answer",
+        "content_type": 18
+    },
+    "model": "auth.permission",
+    "pk": 53
+},
+{
+    "fields": {
+        "codename": "delete_possibleanswer",
+        "name": "Can delete possible answer",
+        "content_type": 18
+    },
+    "model": "auth.permission",
+    "pk": 54
+},
+{
+    "fields": {
+        "codename": "add_studentanswerset",
+        "name": "Can add student answer set",
+        "content_type": 19
+    },
+    "model": "auth.permission",
+    "pk": 55
+},
+{
+    "fields": {
+        "codename": "change_studentanswerset",
+        "name": "Can change student answer set",
+        "content_type": 19
+    },
+    "model": "auth.permission",
+    "pk": 56
+},
+{
+    "fields": {
+        "codename": "delete_studentanswerset",
+        "name": "Can delete student answer set",
+        "content_type": 19
+    },
+    "model": "auth.permission",
+    "pk": 57
+},
+{
+    "fields": {
+        "codename": "add_studentanswer",
+        "name": "Can add student answer",
+        "content_type": 20
+    },
+    "model": "auth.permission",
+    "pk": 58
+},
+{
+    "fields": {
+        "codename": "change_studentanswer",
+        "name": "Can change student answer",
+        "content_type": 20
+    },
+    "model": "auth.permission",
+    "pk": 59
+},
+{
+    "fields": {
+        "codename": "delete_studentanswer",
+        "name": "Can delete student answer",
+        "content_type": 20
+    },
+    "model": "auth.permission",
+    "pk": 60
+},
+{
+    "fields": {
+        "username": "cybran",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": true,
+        "is_staff": true,
+        "last_login": "2015-05-05T06:53:38.141Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$20000$I1imEAOWXd3y$tfJYzbacWyNCbcigdpFjuMCLoINsVCNciuaiUg/4AaQ=",
+        "email": "",
+        "date_joined": "2015-05-05T06:45:49.270Z"
+    },
+    "model": "auth.user",
+    "pk": 1
+},
+{
+    "fields": {
+        "user": 1
+    },
+    "model": "accounts.profile",
+    "pk": 1
+},
+{
+    "fields": {
+        "action_flag": 1,
+        "action_time": "2015-05-05T06:54:18.038Z",
+        "object_repr": "Assignment object",
+        "object_id": "1",
+        "change_message": "",
+        "user": 1,
+        "content_type": 14
+    },
+    "model": "admin.logentry",
+    "pk": 1
+}
+]
