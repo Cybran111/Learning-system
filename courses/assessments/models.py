@@ -14,17 +14,25 @@ class QuestionSet(models.Model):
 
 
 class Question(models.Model):
+    POSSIBLE_TYPES = (
+        ("multiset", "Multiple checkboxes"),
+        ("singleset", "Radiobuttons"),
+        ("multiset_custom", "Multiple checkboxes with student's own answer"),
+        ("singleset_custom", "Radiobuttons with student's own answer")
+    )
+
     questionset = models.ForeignKey(QuestionSet)
     question = models.TextField()
-    explanation = models.TextField()
+    explanation = models.TextField(blank=True, default="")
     value = models.PositiveIntegerField()
+    type = models.TextField(choices=POSSIBLE_TYPES)
 
 
 class PossibleAnswer(models.Model):
     text = models.TextField()
-    # correct_value = models.TextField()
+    correct_value = models.TextField(null=True, default=None)
     is_correct = models.BooleanField(default=False)
-    explanation = models.TextField()
+    explanation = models.TextField(blank=True, default="")
 
 
 class StudentAnswerSet(models.Model):

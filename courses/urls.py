@@ -20,4 +20,7 @@ urlpatterns = patterns('courses.views', url(r'^new$', "create_course_view", name
 
                        url(r'^(?P<course_id>\d+)/assignments/', include('courses.assignments.urls',
                                                                         namespace='assignments')),
+
+                       url(r'^(?P<course_id>\d+)/assessments/', include('courses.assessments.urls',
+                                                                        namespace='assessments')),
                        )
