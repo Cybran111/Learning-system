@@ -3,9 +3,7 @@
 
 
 {% block course_content %}
-    <h4> {{ assessment.title }} </h4>
-    <p> {{ assessment.description }}</p>
-
+    <h4> {{ questionset.title }} </h4>
 
     <ul class="list-group">
         {% for feedback in feedbacks %}
@@ -14,8 +12,12 @@
                 <span class="badge">{{ feedback.mark }}</span>
                 Feedback #{{ feedback.attempt }}
               </li>
+        {% empty %}
+            <li class="list-group-item">
+            You are not attempted this assessment yet.
+            </li>
         {% endfor %}
-    <a href="{% url "courses.assessments.assessment" course.id %}" class="button">Attempt assessment</a>
+    <a href="{% url "courses:assessments:attempt" course.id questionset.week.number questionset.number %}" class="btn btn-primary">Attempt assessment</a>
     </ul>
 
 {% endblock %}

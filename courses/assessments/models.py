@@ -23,7 +23,8 @@ class QuestionSet(models.Model):
 
 class Question(models.Model):
     questionset = models.ForeignKey(QuestionSet)
-    question = models.TextField()
+    number = models.IntegerField()
+    text = models.TextField()
     explanation = models.TextField(blank=True, default="")
     value = models.PositiveIntegerField()
 
@@ -34,6 +35,7 @@ class PossibleAnswer(models.Model):
     is_correct = models.BooleanField(default=False)
     explanation = models.TextField(blank=True, default="")
     question = models.ForeignKey(Question)
+    number = models.IntegerField()
 
 
 class StudentAnswerSet(models.Model):
