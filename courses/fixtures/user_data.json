@@ -161,17 +161,17 @@
 },
 {
     "fields": {
-        "expire_date": "2015-05-19T06:53:38.248Z",
-        "session_data": "NWM3OTM4OTVjNTAxNTM2ZjVjODZlMWNhMzRmNjNkN2IxZTkyYTVlMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjU2YThjYmU0MjE4ZmU4MzM1NzhmMDZjYWY3YjhlZWFlOTc2OWYxMzQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
+        "expire_date": "2015-05-19T08:17:55.810Z",
+        "session_data": "YzFiMDI5YWZhOWU4NjA1NzRhNTAzYTQ1MDhlZDAwNjg2MWJmMTI5Yzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijg0MTNiMjE0MGQwYTRlZTg2ZDhhNDFkMmU5MDcxM2VjOGY1MDA4M2IiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
     },
     "model": "sessions.session",
-    "pk": "1tu2ajqaxmblge6fkver7cmgpz6fd03v"
+    "pk": "m3mjuqwa2lv6e9lsdrn94t3wzox2vulg"
 },
 {
     "fields": {
         "short_description": "Aliquam vitae orci tincidunt, mattis orci sit amet, condimentum turpis. Donec volutpat felis quis mollis.",
         "full_description": "Maecenas porttitor at ante feugiat posuere. Praesent vel elit et ligula laoreet maximus in sed nunc. Maecenas sit amet pharetra purus, et auctor ex. In commodo, tortor a aliquam feugiat, nulla justo rutrum elit, ut blandit diam ipsum ac risus? Nunc vitae magna a magna dapibus consequat. Nam vestibulum ac nulla id convallis. Nullam sed aliquam massa, in malesuada mauris. Nunc a mi vel risus imperdiet volutpat! Curabitur eu arcu quam.\r\n\r\nNulla fringilla dictum quam porttitor varius. Nullam tempus ante sit amet efficitur mattis. Sed convallis; nibh interdum efficitur condimentum, metus dui fermentum arcu, vitae molestie dui augue et felis. Fusce sit amet mi eu augue ultrices hendrerit a in sapien! Mauris convallis vestibulum sapien, eget suscipit augue pellentesque ac. Nunc egestas odio quis tellus aliquam sollicitudin! Fusce turpis velit; blandit quis libero et, facilisis congue nibh. Fusce ac nisl purus?",
-        "img": "../media/courses/default.png",
+        "img": "media/courses/default.png",
         "title": "Nulla mollis neque eget lorem"
     },
     "model": "courses.course",
@@ -181,7 +181,7 @@
     "fields": {
         "short_description": "Fusce eget porta lacus. Proin tincidunt metus urna, vitae rutrum metus imperdiet non. Aliquam erat.",
         "full_description": "Vestibulum rutrum sit amet nulla in laoreet. Duis porta accumsan tortor eget commodo. Duis tempus diam in mauris maximus, ut vehicula erat iaculis. Donec ornare lectus ligula, sed venenatis neque dapibus eu. Proin sem neque, iaculis sed faucibus eu, fringilla nec urna. Sed vitae felis tempor, dignissim magna ut, venenatis arcu. Duis lorem odio; congue nec consequat eget, euismod nec ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget velit vestibulum dolor convallis imperdiet! Etiam purus nunc, convallis varius placerat sit amet, iaculis sed eros. Pellentesque vitae est ultrices lorem ultrices mollis imperdiet et nibh. Nulla semper aliquet pulvinar. Aliquam accumsan lacus purus; at cursus ex pulvinar at. Quisque a convallis ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\r\n\r\nEtiam vulputate quam magna, nec lacinia erat bibendum ut. Nulla ac varius leo. Maecenas et consectetur ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis at nisl sed nulla condimentum commodo. Praesent tempus dolor ac tortor molestie, eu fermentum tellus elementum. Praesent ullamcorper leo vel felis tincidunt, in rutrum orci convallis. Nam sodales convallis dui, pharetra varius justo finibus sed? Sed dignissim varius sem, sit amet vehicula leo posuere id.",
-        "img": "../media/courses/default.png",
+        "img": "media/courses/default.png",
         "title": "Phasellus sodales odio ut tempus."
     },
     "model": "courses.course",
@@ -357,6 +357,15 @@
 },
 {
     "fields": {
+        "course": 1,
+        "role": "student",
+        "user": 2
+    },
+    "model": "accounts.status",
+    "pk": 3
+},
+{
+    "fields": {
         "week": 1,
         "checker_url": "http://localhost:5000",
         "description": "Lalaleila",
@@ -365,6 +374,50 @@
         "course": 1
     },
     "model": "assignments.assignment",
+    "pk": 1
+},
+{
+    "fields": {
+        "week": 1,
+        "description": "Something",
+        "title": "Something",
+        "number": 1,
+        "course": 1,
+        "max_questions": 2,
+        "type": "multiset"
+    },
+    "model": "assessments.questionset",
+    "pk": 1
+},
+{
+    "fields": {
+        "explanation": "because",
+        "question": "Question",
+        "value": 50,
+        "questionset": 1
+    },
+    "model": "assessments.question",
+    "pk": 1
+},
+{
+    "fields": {
+        "explanation": "asda",
+        "question": "another question",
+        "value": 50,
+        "questionset": 1
+    },
+    "model": "assessments.question",
+    "pk": 2
+},
+{
+    "fields": {
+        "text": "Possible 1",
+        "explanation": "expl",
+        "question": 1,
+        "correct_value": "",
+        "is_correct": true
+    },
+    "model": "assessments.possibleanswer",
     "pk": 1
 },
 {
@@ -915,7 +968,7 @@
         "is_active": true,
         "is_superuser": true,
         "is_staff": true,
-        "last_login": "2015-05-05T06:53:38.141Z",
+        "last_login": "2015-05-05T08:17:55.723Z",
         "groups": [],
         "user_permissions": [],
         "password": "pbkdf2_sha256$20000$I1imEAOWXd3y$tfJYzbacWyNCbcigdpFjuMCLoINsVCNciuaiUg/4AaQ=",
@@ -927,9 +980,45 @@
 },
 {
     "fields": {
+        "username": "111",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2015-05-05T08:08:47.952Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$20000$U7UG5yDC259b$7VGNjouaINbkZotKKkq8aGEL3Z5LnihiexBM46ztEWU=",
+        "email": "cybran111@gmail.com",
+        "date_joined": "2015-05-05T08:08:47.463Z"
+    },
+    "model": "auth.user",
+    "pk": 2
+},
+{
+    "fields": {
         "user": 1
     },
     "model": "accounts.profile",
+    "pk": 1
+},
+{
+    "fields": {
+        "user": 2
+    },
+    "model": "accounts.profile",
+    "pk": 2
+},
+{
+    "fields": {
+        "assignment": 1,
+        "check_date": "2015-05-05T07:29:54.388Z",
+        "attempt": 1,
+        "student": 1,
+        "mark": 100
+    },
+    "model": "assignments.feedback",
     "pk": 1
 },
 {
@@ -944,5 +1033,70 @@
     },
     "model": "admin.logentry",
     "pk": 1
+},
+{
+    "fields": {
+        "action_flag": 1,
+        "action_time": "2015-05-05T07:32:46.812Z",
+        "object_repr": "QuestionSet object",
+        "object_id": "1",
+        "change_message": "",
+        "user": 1,
+        "content_type": 16
+    },
+    "model": "admin.logentry",
+    "pk": 2
+},
+{
+    "fields": {
+        "action_flag": 1,
+        "action_time": "2015-05-05T07:35:32.403Z",
+        "object_repr": "Question object",
+        "object_id": "1",
+        "change_message": "",
+        "user": 1,
+        "content_type": 17
+    },
+    "model": "admin.logentry",
+    "pk": 3
+},
+{
+    "fields": {
+        "action_flag": 2,
+        "action_time": "2015-05-05T07:38:53.843Z",
+        "object_repr": "Question object",
+        "object_id": "1",
+        "change_message": "Changed value.",
+        "user": 1,
+        "content_type": 17
+    },
+    "model": "admin.logentry",
+    "pk": 4
+},
+{
+    "fields": {
+        "action_flag": 1,
+        "action_time": "2015-05-05T07:39:17.346Z",
+        "object_repr": "Question object",
+        "object_id": "2",
+        "change_message": "",
+        "user": 1,
+        "content_type": 17
+    },
+    "model": "admin.logentry",
+    "pk": 5
+},
+{
+    "fields": {
+        "action_flag": 1,
+        "action_time": "2015-05-05T07:40:52.415Z",
+        "object_repr": "PossibleAnswer object",
+        "object_id": "1",
+        "change_message": "",
+        "user": 1,
+        "content_type": 18
+    },
+    "model": "admin.logentry",
+    "pk": 6
 }
 ]

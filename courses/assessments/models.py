@@ -5,6 +5,13 @@ from django.db import models
 
 
 class QuestionSet(models.Model):
+    POSSIBLE_TYPES = (
+        ("multiset", "Multiple checkboxes"), ("singleset", "Radiobuttons"),
+        ("multiset_custom", "Multiple checkboxes with student's own answer"),
+        ("singleset_custom", "Radiobuttons with student's own answer")
+    )
+
+    type = models.TextField(choices=POSSIBLE_TYPES)
     title = models.TextField(unique=True)
     description = models.TextField(unique=True)
     number = models.IntegerField()
@@ -14,25 +21,19 @@ class QuestionSet(models.Model):
 
 
 class Question(models.Model):
-    POSSIBLE_TYPES = (
-        ("multiset", "Multiple checkboxes"),
-        ("singleset", "Radiobuttons"),
-        ("multiset_custom", "Multiple checkboxes with student's own answer"),
-        ("singleset_custom", "Radiobuttons with student's own answer")
-    )
 
     questionset = models.ForeignKey(QuestionSet)
     question = models.TextField()
     explanation = models.TextField(blank=True, default="")
     value = models.PositiveIntegerField()
-    type = models.TextField(choices=POSSIBLE_TYPES)
 
 
 class PossibleAnswer(models.Model):
     text = models.TextField()
-    correct_value = models.TextField(null=True, default=None)
+    correct_value = models.TextField(blank=True, default="")
     is_correct = models.BooleanField(default=False)
     explanation = models.TextField(blank=True, default="")
+    question = models.ForeignKey(Question)
 
 
 class StudentAnswerSet(models.Model):
