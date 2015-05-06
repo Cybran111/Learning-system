@@ -21,12 +21,12 @@
                 <div id="collapse{{ week.number }}" class="panel-collapse collapse" role="tabpanel"
                      aria-labelledby="heading{{ week.number }}">
                     <div class="panel-body">
-
+                            {{week.questionset_set.all}}
                         <div class="assessment-list list-group">
-                            {% for assessment  in week.assessment_set.all %}
-                                <a href="{% url "courses:assessments:assessment" course.id week.number assessment.id %}" class="list-group-item">
-                                    <span class="badge">{{ assessment.feedback }}</span>
-                                    {{ assessment.title }}
+                            {% for questionset  in week.questionset_set.all %}
+                                <a href="{% url "courses:assessments:overview" course.id week.number questionset.id %}" class="list-group-item">
+{#                                    <span class="badge">{{ questionset.feedback }}</span>#}
+                                    {{ questionset.title }}
                                 </a>
                             {% endfor %}
 

@@ -13,7 +13,8 @@ class QuestionSet(models.Model):
 
     type = models.TextField(choices=POSSIBLE_TYPES)
     title = models.TextField(unique=True)
-    description = models.TextField(unique=True)
+    # Some description directly in assessment
+    description = models.TextField()
     number = models.IntegerField()
     max_questions = models.PositiveIntegerField()
     course = models.ForeignKey("courses.Course")
@@ -21,7 +22,6 @@ class QuestionSet(models.Model):
 
 
 class Question(models.Model):
-
     questionset = models.ForeignKey(QuestionSet)
     question = models.TextField()
     explanation = models.TextField(blank=True, default="")
