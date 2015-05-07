@@ -5,22 +5,26 @@
 {% block course_content %}
     <h3> {{ questionset.title }} </h3>
     <pre> {{ questionset.description }}</pre>
-        {% for foo in forms %}
-            {{ foo }}
-        {% endfor %}
+{#        {% for foo in forms %}#}
+{#            {{ foo }}#}
+{#        {% endfor %}#}
 
         <form method="post">
-        {% for question in questionset.question_set.all %}
+        {% for question in questionset.questions %}
             <div class="question">
-            <h4> Question {{ forloop.counter }}</h4>
+            <h4> Question {{ question.number }}</h4>
             <pre>
                 {{ question.text }}
             </pre>
             <ul class="list-group">
-{#                {% for possibleanswer in question.possibleanswer_set.all %}#}
+                {{ question.answers }}
+{#                {% for answer in question.answers.choices %}#}
+{#                    {{ answer }}#}
 {#                    <li class="list-group-item checkbox">#}
-{#                      <label><input type="checkbox" name="answer"#}
-{#                                    value="{{ question.number }} {{ possibleanswer.number }}">{{ possibleanswer.text }}</label>#}
+{#                      <label>#}
+{#                          <input type="checkbox" name="answer" value="{{ question.number }}-{{ number }}">#}
+{#                          {{ text }}#}
+{#                      </label>#}
 {#                    </li>#}
 {#                {% endfor %}#}
             </ul>
