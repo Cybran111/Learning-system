@@ -41,7 +41,8 @@ class PossibleAnswer(models.Model):
 class StudentAnswerSet(models.Model):
     user = models.ForeignKey(User)
     questionset = models.ForeignKey(QuestionSet)
-    mark = models.PositiveIntegerField()
+    assigned_question = models.ManyToManyField(Question)
+    mark = models.PositiveIntegerField(default=0)
     is_finished = models.BooleanField(default=False)
 
 

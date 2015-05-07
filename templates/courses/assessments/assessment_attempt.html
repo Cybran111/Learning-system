@@ -10,6 +10,7 @@
 {#        {% endfor %}#}
 
         <form method="post">
+        {% csrf_token %}
         {% for question in questionset.questions %}
             <div class="question">
             <h4> Question {{ question.number }}</h4>
