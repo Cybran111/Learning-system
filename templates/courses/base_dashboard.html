@@ -9,18 +9,18 @@
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
             <li class="{% if active_tab == "news" %} active {% endif %}">
-                <a href="{% url "courses:news" course.id %}">News</a>
+                <a href="{% url "courses:news" course.id %}">Новини</a>
             </li>
             <li class="{% if active_tab == "lectures" %} active {% endif %} ">
-                <a href="{% url "courses:lectures" course.id %}">Lectures</a>
+                <a href="{% url "courses:lectures" course.id %}">Лекції</a>
             </li>
 
             <li class="{% if active_tab == "assessments" %} active {% endif %} ">
-                <a href="{% url "courses:assessments:assessments" course.id %}">Assessments</a>
+                <a href="{% url "courses:assessments:assessments" course.id %}">Опитування</a>
             </li>
 
             <li class="{% if active_tab == "assignments" %} active {% endif %} ">
-                <a href="{% url "courses:assignments:assignments" course.id %}">Assignments</a>
+                <a href="{% url "courses:assignments:assignments" course.id %}">Завдання</a>
             </li>
 
           </ul>
