@@ -14,7 +14,7 @@
               </li>
         {% empty %}
             <li class="list-group-item">
-            You are not attempted this assessment yet.
+            Ви ще не пройшли жодного тесту.
             </li>
         {% endfor %}
     <a href="{% url "courses:assessments:attempt" course.id questionset.week.number questionset.number %}" class="btn btn-primary">Attempt assessment</a>
