@@ -7,7 +7,7 @@
     <div id="full-desc"> {{ course.full_description }}</div>
 
     {% if is_enrolled %}
-        <a href="{% url "courses:news" course.id %}" class="btn btn-primary btn-lg">Go to class</a>
+        <a href="{% url "courses:news" course.id %}" class="btn btn-primary btn-lg">Розпочати заняття</a>
     {% else %}
     <form action="{% url "accounts:enroll" %}" method="post">
         {% csrf_token %}
@@ -16,5 +16,5 @@
     </form>
     {% endif %}
 
-    <a id="manage-course" href="{% url "courses:manage" course.id %}">Manage a course list</a>
+    <a id="manage-course" href="{% url "courses:manage" course.id %}">Управління списком курсів</a>
 {% endblock %}
