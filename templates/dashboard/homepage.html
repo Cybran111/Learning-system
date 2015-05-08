@@ -7,9 +7,9 @@
         <p> А що в нас для Вас є? Велика кількість пізнавальних і цікавих курсів! </p>
 
         {% if user.is_authenticated  %}
-            <p>Hello, {{ user }}</p>
+            <p>Вітаємо, {{ user }}</p>
             <p>
-                <a class="btn btn-primary btn-lg" href="{% url "accounts:profile" %}" role="button">Dashboard</a>
+                <a class="btn btn-primary btn-lg" href="{% url "accounts:profile" %}" role="button">Профіль</a>
             </p>
         {% else %}
         <p>

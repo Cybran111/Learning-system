@@ -11,15 +11,15 @@
         {% for feedback in feedbacks %}
           <li class="list-group-item">
             <span class="badge">{{ feedback.mark }}</span>
-            Feedback #{{ feedback.attempt }}
+            Відгук #{{ feedback.attempt }}
           </li>
         {% endfor %}
     </ul>
-{#http://localhost:5000#}
+
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ solution.as_p }}
-        <p><input type="submit" value="Upload" /></p>
+        <p><input type="submit" value="Відіслати" /></p>
     </form>
 
 

@@ -12,7 +12,7 @@
     <form action="{% url "accounts:enroll" %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="course" value="{{ course.id }}">
-        <input id="enroll" class="btn btn-primary btn-lg" type="submit" value="Enroll">
+        <input id="enroll" class="btn btn-primary btn-lg" type="submit" value="Приєднатися">
     </form>
     {% endif %}
 

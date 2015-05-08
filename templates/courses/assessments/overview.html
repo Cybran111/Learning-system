@@ -12,7 +12,7 @@
                 <span class="badge">{{ feedback.mark }}</span>
                   {% with forloop.counter as feedback_number %}
                       <a href="{% url "courses:assessments:feedback" course.id week_id assessment_id feedback_number %}">
-                          Feedback #{{ feedback_number }}</a>
+                          Відгук #{{ feedback_number }}</a>
                   {% endwith %}
               </li>
         {% empty %}
