@@ -47,7 +47,11 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
                     mark += question.value / question.possibleanswer_set.all().count()
 
         answer_set = StudentAnswerSet.objects.create(user=request.user, questionset=questionset,
-                                                     mark=mark, is_finished=True)
+                                                     mark=mark, is_finished=True,
+                                                     number=StudentAnswerSet.objects.filter(
+                                                         user=request.user,
+                                                         questionset=questionset).count()+1
+                                                     )
 
         for answer in request.POST.getlist("answers"):
             StudentAnswer.objects.create(answerset=answer_set,
@@ -60,13 +64,33 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
 @login_required
 def assessment_feedback(request, course_id, week_id, assessment_id, feedback_id):
     questionset = QuestionSet.objects.get(course=course_id, week=week_id, number=assessment_id)
-    feedback = StudentAnswerSet.objects.get(number=feedback_id, user=request.user, questionset=questionset)
+    answerset = StudentAnswerSet.objects.get(number=feedback_id, user=request.user, questionset=questionset)
 
-    # questionset = {
-    #     "title": questionset.title,
-    #     "description": questionset.description,
-    #     "questions": (
-    #         (() for question in questionset.question_set.all())
-    #     )
-    # }
-    return render(request, "courses/assessments/feedback.html", {"feedback": feedback, "questionset": questionset})
+    feedback = {
+        "title": questionset.title,
+        "description": questionset.description,
+        "questions": tuple(
+            ({
+                "number": question.number,
+                "text": question.text,
+                "explanation": question.explanation,
+                "answers": tuple({
+                    "text": answer.text,
+                    "is_correct": answer.is_correct,
+                    "explanation": answer.explanation,
+                    "is_chosen": bool(StudentAnswer.objects.filter(answerset=answerset,
+                                                                   question=question,
+                                                                   chosed_answer=answer))
+                } for answer in question.possibleanswer_set.all())
+            } for question in questionset.question_set.all())
+        )
+    }
+
+    # for question in feedback["questions"]:
+    #     for answer in question["answers"]:
+    #         print answer["text"], bool(answer["is_chosen"])
+    #         print answer["is_correct"]
+    #         print answer["is_chosen"]
+
+    # return render(request, "courses/assessments/feedback.html", {"feedback": answerset, "questionset": questionset})
+    return render(request, "courses/assessments/feedback.html", {"feedback": feedback})

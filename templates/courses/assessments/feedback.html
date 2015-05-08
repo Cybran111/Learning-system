@@ -3,10 +3,13 @@
 
 
 {% block course_content %}
-    <h3> {{ questionset.title }} </h3>
-    <pre> {{ questionset.description }}</pre>
+    <h3> {{ feedback.title }} </h3>
+    <pre> {{ feedback.description }}</pre>
 
-    {% for question in questionset.question_set.all %}
+{#    <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>#}
+
+
+    {% for question in feedback.questions %}
         <div class="question">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -20,11 +23,23 @@
                 </div>
 
                 <div class="list-group">
-                    {% for answer in question.possibleanswer_set.all %}
-                        <div class="list-group-item checkbox disabled">
+                    {% for answer in question.answers %}
+
+{#                        {{ answer.is_chosen }}#}
+{#                        {{ answer.is_correct }}#}
+
+                        {% if answer.is_chosen == answer.is_correct %}
+                            <div class="list-group-item checkbox list-group-item-success">
+                        {% else %}
+                            <div class="list-group-item checkbox list-group-item-danger">
+                        {% endif %}
                             <div class="list-group-item-text">
                                 <label>
-                                    <input type="checkbox" checked="checked" disabled>
+                                    {% if answer.is_chosen %}
+                                        <input type="checkbox" checked="checked" disabled>
+                                    {% else %}
+                                        <input type="checkbox" disabled>
+                                    {% endif %}
                                     {{ answer.text }}
                                 </label>
                             </div>
