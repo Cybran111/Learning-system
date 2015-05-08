@@ -80,12 +80,12 @@ class CRUDTest(CourseTest):
         return lectures
 
 
-class ListTest(CourseTest):
-    def test_homepage_returns_correct_page_with_list(self):
-        response = self.client.get('/')
-        courses = Course.objects.all()
-        expected_html = render_to_string('dashboard/homepage.html', {"courses": courses})
-        self.assertEqual(response.content.decode(), expected_html)
+# class ListTest(CourseTest):
+#     def test_homepage_returns_correct_page_with_list(self):
+#         response = self.client.get('/')
+#         courses = Course.objects.all()
+#         expected_html = render_to_string('dashboard/homepage.html', {"courses": courses})
+#         self.assertEqual(response.content.decode(), expected_html)
 
 
 class SaveCourseTest(TestCase):
