@@ -10,7 +10,10 @@
 
               <li class="list-group-item">
                 <span class="badge">{{ feedback.mark }}</span>
-                Feedback #{{ feedback.attempt }}
+                  {% with forloop.counter as feedback_number %}
+                      <a href="{% url "courses:assessments:feedback" course.id week_id assessment_id feedback_number %}">
+                          Feedback #{{ feedback_number }}</a>
+                  {% endwith %}
               </li>
         {% empty %}
             <li class="list-group-item">

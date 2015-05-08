@@ -5,6 +5,7 @@ from django.template.loader_tags import do_extends
 
 register = template.Library()
 
+
 class XExtendsNode(template.Node):
     def __init__(self, node, kwargs):
         self.node = node
@@ -29,7 +30,8 @@ def do_xextends(parser, token):
         bits = bits[:pos]
         for i in argslist:
             try:
-                a, b = i.split('=', 1); a = a.strip(); b = b.strip()
+                a, b = i.split('=', 1)
+                a, b = a.strip(), b.strip()
                 keys = list(tokenize.generate_tokens(StringIO.StringIO(a).readline))
                 if keys[0][0] == tokenize.NAME:
                     kwargs[str(a)] = str(b)

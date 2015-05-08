@@ -18,8 +18,9 @@ def assessments_view(request, course_id):
 def assessment_overview(request, course_id, week_id, assessment_id):
     questionset = QuestionSet.objects.get(course=course_id, week=week_id, number=assessment_id)
     feedbacks = StudentAnswerSet.objects.filter(user=request.user.id, questionset=assessment_id)
-    return render(request, "courses/assessments/assessment_overview.html",
-                  {"questionset": questionset, "feedbacks": feedbacks})
+    return render(request, "courses/assessments/overview.html",
+                  {"questionset": questionset, "week_id": week_id,
+                   "assessment_id": assessment_id, "feedbacks": feedbacks})
 
 
 @login_required
@@ -28,9 +29,10 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
 
     if request.method == "GET":
         questionset = {"title": questionset.title, "description": questionset.description,
-                       "questions": (QuestionForm(text=question.text, number=question.number, answers=(answer for answer in question.possibleanswer_set.all()))
+                       "questions": (QuestionForm(text=question.text, number=question.number,
+                                                  answers=(answer for answer in question.possibleanswer_set.all()))
                                      for question in questionset.question_set.all())}
-        return render(request, "courses/assessments/assessment_attempt.html", {"questionset": questionset})
+        return render(request, "courses/assessments/attempt.html", {"questionset": questionset})
 
     if request.method == "POST":
 
@@ -55,4 +57,8 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
         return redirect("courses:news", course_id=course_id)
 
 
-
+@login_required
+def assessment_feedback(request, course_id, week_id, assessment_id, feedback_id):
+    questionset = QuestionSet.objects.get(course=course_id, week=week_id, number=assessment_id)
+    feedback = StudentAnswerSet.objects.get(number=feedback_id, user=request.user, questionset=questionset)
+    return render(request, "courses/assessments/feedback.html", {"feedback": feedback, "questionset": questionset})

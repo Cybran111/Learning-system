@@ -44,6 +44,7 @@ class StudentAnswerSet(models.Model):
     assigned_question = models.ManyToManyField(Question)
     mark = models.PositiveIntegerField(default=0)
     is_finished = models.BooleanField(default=False)
+    number = models.IntegerField()
 
 
 class StudentAnswer(models.Model):

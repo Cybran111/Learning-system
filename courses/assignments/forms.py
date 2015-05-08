@@ -12,6 +12,7 @@ class RestrictedFileField(forms.FileField):
             self.max_upload_size = settings.MAX_UPLOAD_SIZE
         super(RestrictedFileField, self).__init__(*args, **kwargs)
 
+
     def clean(self, *args, **kwargs):
         data = super(RestrictedFileField, self).clean(*args, **kwargs)
         try:
@@ -29,4 +30,4 @@ class RestrictedFileField(forms.FileField):
 class NewSolutionForm(forms.Form):
     solution = RestrictedFileField(label='Select an zip archive',
                                    content_types=['application/zip'],
-                                   max_upload_size=1048576) # 1 Mb
+                                   max_upload_size=1048576)  # 1 Mb
