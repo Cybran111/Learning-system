@@ -13,7 +13,7 @@
         {% csrf_token %}
         {% for question in questionset.questions %}
             <div class="question">
-            <h4> Question {{ question.number }}</h4>
+            <h4> Запитання {{ question.number }}</h4>
             <pre>
                 {{ question.text }}
             </pre>

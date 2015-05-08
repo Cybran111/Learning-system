@@ -7,7 +7,7 @@
         <div class="navbar-right">
         {% if user.is_authenticated %}
 
-                <p class="navbar-text"> Увійти як
+                <p class="navbar-text"> Ви зайшли як
                     <a id="user-dashboard" class="navbar-link" href="{% url "accounts:profile" %}"> {{ user }}</a>
                 </p>
                 <a type="button" href="{% url "accounts:logout" %}" class="btn btn-default navbar-btn">Вийти</a>
