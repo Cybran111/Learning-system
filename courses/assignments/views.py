@@ -1,10 +1,8 @@
-from datetime import timedelta
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.signing import SignatureExpired, loads, dumps
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -14,7 +12,7 @@ import requests
 from Learning_system.settings import ASSIGNMENT_FEEDBACK_TIMEOUT
 from courses.assignments.forms import NewSolutionForm
 from courses.assignments.models import Feedback, Assignment
-from courses.models import Week, Course
+from courses.models import Week
 
 
 @login_required
@@ -47,10 +45,11 @@ def assignment_view(request, course_id, week_id, assignment_id):
                     }
                 ))))
 
-            requests.post(assignment.checker_url, data={"url": url, "timeout": ASSIGNMENT_FEEDBACK_TIMEOUT}, files=request.FILES)
+            requests.post(assignment.checker_url, data={"url": url, "timeout": ASSIGNMENT_FEEDBACK_TIMEOUT},
+                          files=request.FILES)
 
     return render(request, "courses/assignments/assignment.html",
-                      {"assignment": assignment, "feedbacks": feedbacks, "solution": form})
+                  {"assignment": assignment, "feedbacks": feedbacks, "solution": form})
 
 
 @require_POST
@@ -62,8 +61,8 @@ def feedback_view(request, course_id, feedback_route):
         return HttpResponseBadRequest()
 
     feedback_object = Feedback.objects.get(assignment=feedback["assignment"],
-                                          student=feedback["student"],
-                                          attempt=feedback["attempt"],)
+                                           student=feedback["student"],
+                                           attempt=feedback["attempt"],)
     feedback_object.mark = request.POST["mark"]
     try:
         feedback_object.full_clean()

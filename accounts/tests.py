@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from courses.models import Course
-from accounts.models import Profile, Status
+from accounts.models import Profile
 
 
 PK = 1
