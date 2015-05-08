@@ -61,4 +61,12 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
 def assessment_feedback(request, course_id, week_id, assessment_id, feedback_id):
     questionset = QuestionSet.objects.get(course=course_id, week=week_id, number=assessment_id)
     feedback = StudentAnswerSet.objects.get(number=feedback_id, user=request.user, questionset=questionset)
+
+    # questionset = {
+    #     "title": questionset.title,
+    #     "description": questionset.description,
+    #     "questions": (
+    #         (() for question in questionset.question_set.all())
+    #     )
+    # }
     return render(request, "courses/assessments/feedback.html", {"feedback": feedback, "questionset": questionset})
