@@ -1,10 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_POST
 from accounts.models import Status
-
-from courses.forms import NewCourseForm, NewLectureForm
 from courses.models import Course, Week, Lecture, News, LectureMaterials
 
 
