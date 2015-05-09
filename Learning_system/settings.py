@@ -24,8 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 # Generate a secret key as Django startproject do
-SECRET_KEY = "secret" if 'DJANGO_PROD' not in os.environ else get_random_string(50, chars)
+if 'DJANGO_SECRET_KEY' in os.environ:
+    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
+else:
+    SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DJANGO_PROD' not in os.environ
