@@ -1,7 +1,7 @@
 # Register your models here.
 from django.contrib import admin
 
-from courses.models import Lecture, Course, Week
+from courses.models import Lecture, Course, Week, News, LectureMaterials
 
 
-admin.site.register((Course, Week, Lecture))
+admin.site.register((Course, Week, Lecture, News, LectureMaterials))
