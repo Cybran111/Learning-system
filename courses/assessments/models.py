@@ -20,6 +20,9 @@ class QuestionSet(models.Model):
     course = models.ForeignKey("courses.Course")
     week = models.ForeignKey("courses.Week")
 
+    class Meta:
+        unique_together = ('number', 'course', 'week', 'title')
+
 
 class Question(models.Model):
     questionset = models.ForeignKey(QuestionSet)
@@ -27,6 +30,12 @@ class Question(models.Model):
     text = models.TextField()
     explanation = models.TextField(blank=True, default="")
     value = models.PositiveIntegerField()
+
+    class Meta:
+        unique_together = (
+            ('questionset', 'number'),
+            ('questionset',  'text')
+        )
 
 
 class PossibleAnswer(models.Model):
@@ -37,6 +46,12 @@ class PossibleAnswer(models.Model):
     question = models.ForeignKey(Question)
     number = models.IntegerField()
 
+    class Meta:
+        unique_together = (
+            ('question', 'number'),
+            ('question', 'text')
+        )
+
 
 class StudentAnswerSet(models.Model):
     user = models.ForeignKey(User)
@@ -46,8 +61,14 @@ class StudentAnswerSet(models.Model):
     is_finished = models.BooleanField(default=False)
     number = models.IntegerField()
 
+    class Meta:
+        unique_together = ('user', 'number', "questionset")
+
 
 class StudentAnswer(models.Model):
     answerset = models.ForeignKey(StudentAnswerSet)
     question = models.ForeignKey(Question)
     chosed_answer = models.ForeignKey(PossibleAnswer)
+
+    class Meta:
+        unique_together = ('answerset', 'question', 'chosed_answer')
