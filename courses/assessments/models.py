@@ -25,7 +25,7 @@ class QuestionSet(models.Model):
         ordering = ('number',)
 
     def __unicode__(self):
-        return u'%s (Week %d, number %d)' % self.title, self.week_id, self.number
+        return u'%s (Week %d, number %d)' % self.title, self.week.number.id, self.number
 
 
 class Question(models.Model):
@@ -43,6 +43,7 @@ class Question(models.Model):
 
     def __unicode__(self):
         return u'%s (Number %d, value %d)' % self.text, self.number, self.value
+
 
 class PossibleAnswer(models.Model):
     text = models.TextField()
