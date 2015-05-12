@@ -11,25 +11,25 @@ class CourseTest(TestCase):
     fixtures = ['tests_data.json']
 
 
-class CRUDTest(CourseTest):
-    def test_can_get_course_overview_page(self):
-        course = Course.objects.get(pk=PK)
-        response = self.client.get('/courses/%s/overview/' % (course.id))
-
-        self.assertContains(response, escape(course.title))
-        self.assertContains(response, escape(course.short_description))
-        self.assertContains(response, escape(course.full_description))
-
-    def get_weeks_count(self, course):
-        return Week.objects.filter(course=course).count()
-
-    def get_lectures_count(self, week):
-        return Lecture.objects.filter(week=week).count()
-
-    def get_lectures(self, course):
-        lectures = (lecture for week in Week.objects.filter(course=course) for lecture in
-                    Lecture.objects.filter(week=week))
-        return lectures
+# class CRUDTest(CourseTest):
+#     def test_can_get_course_overview_page(self):
+#         course = Course.objects.get(pk=PK)
+#         response = self.client.get('/courses/%s/overview/' % (course.id))
+#
+#         self.assertContains(response, escape(course.title))
+#         self.assertContains(response, escape(course.short_description))
+#         self.assertContains(response, escape(course.full_description))
+#
+#     def get_weeks_count(self, course):
+#         return Week.objects.filter(course=course).count()
+#
+#     def get_lectures_count(self, week):
+#         return Lecture.objects.filter(week=week).count()
+#
+#     def get_lectures(self, course):
+#         lectures = (lecture for week in Week.objects.filter(course=course) for lecture in
+#                     Lecture.objects.filter(week=week))
+#         return lectures
 
 
 class SaveCourseTest(TestCase):
