@@ -12,7 +12,7 @@ class QuestionSet(models.Model):
     )
 
     type = models.TextField(choices=POSSIBLE_TYPES)
-    title = models.TextField(unique=True)
+    title = models.TextField()
     # Some description directly in assessment
     description = models.TextField()
     number = models.IntegerField()
@@ -21,8 +21,11 @@ class QuestionSet(models.Model):
     week = models.ForeignKey("courses.Week")
 
     class Meta:
-        unique_together = ('number', 'course', 'week', 'title')
+        unique_together = (('number', 'course', 'week'), ('title', 'week', 'course'))
         ordering = ('number',)
+
+    def __unicode__(self):
+        return u'%s (Week %d, number %d)' % self.title, self.week_id, self.number
 
 
 class Question(models.Model):
@@ -38,6 +41,8 @@ class Question(models.Model):
             ('questionset',  'text')
         )
 
+    def __unicode__(self):
+        return u'%s (Number %d, value %d)' % self.text, self.number, self.value
 
 class PossibleAnswer(models.Model):
     text = models.TextField()
@@ -55,6 +60,9 @@ class PossibleAnswer(models.Model):
 
         ordering = ('number',)
 
+    def __unicode__(self):
+        return u'%s (number %d)' % self.text, self.number
+
 
 class StudentAnswerSet(models.Model):
     user = models.ForeignKey(User)
@@ -66,6 +74,9 @@ class StudentAnswerSet(models.Model):
 
     class Meta:
         unique_together = ('user', 'number', "questionset")
+
+    def __unicode__(self):
+        return u"%s' attempt (number %d)" % self.user.username, self.number
 
 
 class StudentAnswer(models.Model):

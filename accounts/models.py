@@ -12,6 +12,9 @@ class Profile(models.Model):
     # website = models.URLField(blank=True)
     # avatar = models.ImageField(upload_to="avatars", blank=True)
 
+    def __unicode__(self):
+        return self.user.username
+
 
 class Status(models.Model):
     user = models.ForeignKey("Profile")
