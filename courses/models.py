@@ -8,6 +8,9 @@ class Course(models.Model):
     short_description = models.TextField(default="")
     full_description = models.TextField(default="")
 
+    def __unicode__(self):
+        return self.title
+
 
 class News(models.Model):
     course = models.ForeignKey("Course")
@@ -15,8 +18,8 @@ class News(models.Model):
     text = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ('date_created',)
+    def __unicode__(self):
+        return u'%s (course %d)' % (self.title, self.course_id)
 
 
 class Week(models.Model):
@@ -25,6 +28,9 @@ class Week(models.Model):
 
     class Meta:
         unique_together = ('course', 'number',)
+
+    def __unicode__(self):
+        return u'Course %d, number %d' % (self.course_id, self.number)
 
 
 class Lecture(models.Model):
@@ -41,8 +47,14 @@ class Lecture(models.Model):
         unique_together = ('order_id', 'week',)
         ordering = ('order_id',)
 
+    def __unicode__(self):
+        return u'%s (course %d, week %d, number %d)' % (self.title, self.week.course_id, self.week_id, self.order_id)
+
 
 class LectureMaterials(models.Model):
     lecture = models.ForeignKey("Lecture")
     title = models.TextField()
     link = models.URLField()
+
+    def __unicode__(self):
+        return u'%s (lecture %d, url %s)' % (self.title, self.lecture_id, self.link)
