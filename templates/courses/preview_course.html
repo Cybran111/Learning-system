@@ -4,7 +4,7 @@
 {% block content %}
     <h2> {{ course.title }}</h2>
     <h3>{{ course.short_description }}</h3>
-    <div id="full-desc"> {{ course.full_description }}</div>
+    <div id="full-desc"> {{ course.full_description|linebreaks }}</div>
 
     {% if is_enrolled %}
         <a href="{% url "courses:news" course.id %}" class="btn btn-primary btn-lg">Розпочати заняття</a>
