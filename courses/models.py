@@ -4,7 +4,7 @@ from django.db import models
 
 class Course(models.Model):
     title = models.TextField(unique=True)
-    img = models.ImageField(upload_to="courses", default="/media/courses/default.png")
+    img = models.ImageField(upload_to="courses", default="/static/courses/default.png")
     short_description = models.TextField(default="")
     full_description = models.TextField(default="")
 
