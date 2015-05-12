@@ -23,7 +23,7 @@
                     <div class="panel-body">
                         <div class="assessment-list list-group">
                             {% for questionset  in week.questionset_set.all %}
-                                <a href="{% url "courses:assessments:overview" course.id week.number questionset.id %}" class="list-group-item">
+                                <a href="{% url "courses:assessments:overview" course.id week.number questionset.number %}" class="list-group-item">
 {#                                    <span class="badge">{{ questionset.feedback }}</span>#}
                                     {{ questionset.title }}
                                 </a>
