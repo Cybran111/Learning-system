@@ -15,6 +15,9 @@ class News(models.Model):
     text = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('date_created',)
+
 
 class Week(models.Model):
     course = models.ForeignKey("Course")
@@ -36,6 +39,7 @@ class Lecture(models.Model):
 
     class Meta:
         unique_together = ('order_id', 'week',)
+        ordering = ('order_id',)
 
 
 class LectureMaterials(models.Model):

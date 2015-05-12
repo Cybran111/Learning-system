@@ -22,6 +22,7 @@ class QuestionSet(models.Model):
 
     class Meta:
         unique_together = ('number', 'course', 'week', 'title')
+        ordering = ('number',)
 
 
 class Question(models.Model):
@@ -51,6 +52,8 @@ class PossibleAnswer(models.Model):
             ('question', 'number'),
             ('question', 'text')
         )
+
+        ordering = ('number',)
 
 
 class StudentAnswerSet(models.Model):
