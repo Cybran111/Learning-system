@@ -60,6 +60,6 @@ import re
 
 @stringfilter
 def spacify(value, autoescape=None):
-    return value.replace(' ', '&nbsp;')
+    return mark_safe(conditional_escape(value).replace(' ', '&nbsp;'))
 spacify.needs_autoescape = True
 register.filter(spacify)
