@@ -25,7 +25,7 @@ class QuestionSet(models.Model):
         ordering = ('number',)
 
     def __unicode__(self):
-        return u'%s (Week %d, number %d)' % (self.title, self.week_id, self.number)
+        return u'%s (course %d, week %d, number %d)' % (self.title, self.course_id, self.week_id, self.number)
 
 
 class Question(models.Model):
@@ -42,7 +42,7 @@ class Question(models.Model):
         )
 
     def __unicode__(self):
-        return u'%s (Number %d, value %d)' % (self.text, self.number, self.value)
+        return u'%s (number %d, value %d, questionset %d)' % (self.text, self.number, self.value, self.questionset_id)
 
 
 class PossibleAnswer(models.Model):
@@ -62,7 +62,7 @@ class PossibleAnswer(models.Model):
         ordering = ('number',)
 
     def __unicode__(self):
-        return u'%s (number %d)' % (self.text, self.number)
+        return u'%s (question %d, number %d)' % (self.text, self.question_id, self.number)
 
 
 class StudentAnswerSet(models.Model):
@@ -77,7 +77,7 @@ class StudentAnswerSet(models.Model):
         unique_together = ('user', 'number', "questionset")
 
     def __unicode__(self):
-        return u"%s' attempt (number %d)" % (self.user.username, self.number)
+        return u"%s' attempt (number %d, questionset %d)" % (self.user.username, self.number, self.questionset_id)
 
 
 class StudentAnswer(models.Model):
