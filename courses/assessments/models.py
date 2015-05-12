@@ -76,7 +76,7 @@ class StudentAnswerSet(models.Model):
         unique_together = ('user', 'number', "questionset")
 
     def __unicode__(self):
-        return u"%s' attempt (number %d)" % self.user.username, self.number
+        return u"%s' attempt (number %d)" % self.user, self.number
 
 
 class StudentAnswer(models.Model):
