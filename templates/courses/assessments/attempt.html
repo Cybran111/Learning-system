@@ -1,4 +1,5 @@
 {% load course_tags %}
+{% load spacify %}
 {% xextends "courses/base_dashboard.html" with active_tab=assessments %}
 
 
@@ -15,7 +16,7 @@
                 {{ question.text|linebreaks }}
             </pre>
             <ul class="list-group">
-                {{ question.answers|linebreaks|s }}
+                {{ question.answers|linebreaks|spacify }}
             </ul>
 
             </div>
