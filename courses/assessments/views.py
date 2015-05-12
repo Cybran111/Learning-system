@@ -58,7 +58,8 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
                                          question=Question.objects.get(questionset=questionset, number=answer[0]),
                                          chosed_answer=PossibleAnswer.objects.get(question=answer[0], number=answer[2]))
 
-        return redirect("courses:news", course_id=course_id)
+        return redirect("courses:assessments:feedback", course_id=course_id, week_id=week_id,
+                        assessment_id=assessment_id, feedback_id=answer_set.number)
 
 
 @login_required
