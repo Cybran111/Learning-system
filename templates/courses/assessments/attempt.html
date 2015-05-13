@@ -15,7 +15,22 @@
                 {{ question.text|linebreaks }}
             </pre>
             <ul class="list-group">
-                {{ question.answers|spacify|linebreaks }}
+
+                {% for answer in question.answers %}
+
+                        <div class="list-group-item checkbox">
+                            <div class="list-group-item-text">
+                                <label for="{{ answer.id_for_label }}">
+                                    <input id="{{ answer.id_for_label }}" type="checkbox"
+                                           value="{{ answer.choice_value }}" name="{{ answer.name }}">
+                                    {{ answer.choice_label|spacify }}
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+{#                {{ question.answers|linebreaks }}#}
             </ul>
 
             </div>

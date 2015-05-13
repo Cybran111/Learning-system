@@ -3,6 +3,10 @@ import tokenize
 from django import template
 from django.template.loader_tags import do_extends
 
+from django.template.defaultfilters import stringfilter
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
+
 register = template.Library()
 
 
@@ -49,17 +53,13 @@ def do_xextends(parser, token):
 
 register.tag('xextends', do_xextends)
 
-
-from django.template import Library
-from django.template.defaultfilters import stringfilter
-from django.utils.html import conditional_escape
-from django.utils.safestring import mark_safe
-import re
-
-# register = Library()
-
 @stringfilter
 def spacify(value, autoescape=None):
-    return mark_safe(conditional_escape(value).replace(' ', '&nbsp;'))
+    if autoescape:
+        esc = conditional_escape
+    else:
+        esc = lambda x: x
+    return mark_safe(esc(value).replace(' ', '&nbsp;'))
+
 spacify.needs_autoescape = True
 register.filter(spacify)
