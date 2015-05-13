@@ -48,7 +48,7 @@ class Lecture(models.Model):
         ordering = ('order_id',)
 
     def __unicode__(self):
-        return u'%s (course %d, week %d, number %d)' % (self.title, self.week.course_id, self.week_id, self.order_id)
+        return u'%s (course %d, week %d, number %d)' % (self.title, self.week.course_id, self.week.number, self.order_id)
 
 
 class LectureMaterials(models.Model):
