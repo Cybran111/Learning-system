@@ -31,8 +31,8 @@ else:
     SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = 'DJANGO_PROD' not in os.environ
-DEBUG = True
+DEBUG = 'DJANGO_PROD' not in os.environ
+# DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
@@ -102,7 +102,7 @@ DATABASES = dict()
 if "DJANGO_PROD" in os.environ:
     DATABASES['default'] = dj_database_url.config()
     # Enable Connection Pooling
-    # DATABASES['default']['ENGINE'] = 'django_postgrespool'
+    DATABASES['default']['ENGINE'] = 'django_postgrespool'
 
 else:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), }
