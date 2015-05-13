@@ -23,7 +23,7 @@
                                 <label for="{{ answer.id_for_label }}">
                                     <input id="{{ answer.id_for_label }}" type="checkbox"
                                            value="{{ answer.choice_value }}" name="{{ answer.name }}">
-                                    {{ answer.choice_label|spacify }}
+                                    {{ answer.choice_label|spacify|linebreaksbr }}
                                 </label>
                             </div>
                         </div>

@@ -40,7 +40,7 @@
                                     {% else %}
                                         <input type="checkbox" disabled>
                                     {% endif %}
-                                    {{ answer.text }}
+                                    {{ answer.text|spacify|linebreaksbr}}
                                 </label>
                             </div>
                             {% if answer.explanation %}
