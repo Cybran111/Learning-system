@@ -16,8 +16,10 @@ def assessments_view(request, course_id):
 
 @login_required
 def assessment_overview(request, course_id, week_id, assessment_id):
-    questionset = QuestionSet.objects.get(course=course_id, week=week_id, number=assessment_id)
-    feedbacks = StudentAnswerSet.objects.filter(user=request.user.id, questionset=assessment_id)
+    questionset = QuestionSet.objects.get(course=course_id,
+                                          week=Week.objects.get(course=course_id, number=week_id),
+                                          number=assessment_id)
+    feedbacks = StudentAnswerSet.objects.filter(user=request.user.id, questionset=questionset)
     return render(request, "courses/assessments/overview.html",
                   {"questionset": questionset, "week_id": week_id,
                    "assessment_id": assessment_id, "feedbacks": feedbacks})
@@ -66,7 +68,9 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
 
 @login_required
 def assessment_feedback(request, course_id, week_id, assessment_id, feedback_id):
-    questionset = QuestionSet.objects.get(course=course_id, week=week_id, number=assessment_id)
+    questionset = QuestionSet.objects.get(course=course_id,
+                                          week=Week.objects.get(course=course_id, number=week_id),
+                                          number=assessment_id)
     answerset = StudentAnswerSet.objects.get(number=feedback_id, user=request.user, questionset=questionset)
 
     feedback = {
