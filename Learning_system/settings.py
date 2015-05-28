@@ -8,14 +8,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-
-
-
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
 from datetime import timedelta
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 import os
@@ -34,8 +26,8 @@ else:
     SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = 'DJANGO_PROD' not in os.environ
-DEBUG = True
+DEBUG = 'DJANGO_PROD' not in os.environ
+# DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
@@ -53,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'django_extensions',
     'courses',
     'accounts',
