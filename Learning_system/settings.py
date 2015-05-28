@@ -9,9 +9,15 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 from datetime import timedelta
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-from django.utils.crypto import get_random_string
 import os
 import dj_database_url
 
@@ -19,9 +25,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-
-chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 # Generate a secret key as Django startproject do
 if 'DJANGO_SECRET_KEY' in os.environ:
