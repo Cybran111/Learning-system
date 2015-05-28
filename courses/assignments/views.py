@@ -42,8 +42,8 @@ def assignment_view(request, course_id, week_id, assignment_id):
                         "assignment": feedback.assignment.id,
                         "student": feedback.student.id,
                         "attempt": feedback.attempt
-                    }
-                ))))
+                    })
+            )))
 
             requests.post(assignment.checker_url, data={"url": url, "timeout": ASSIGNMENT_FEEDBACK_TIMEOUT},
                           files=request.FILES)

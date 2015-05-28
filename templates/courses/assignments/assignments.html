@@ -24,7 +24,7 @@
 
                         <div class="assignment-list list-group">
                             {% for assignment  in week.assignment_set.all %}
-                                <a href="{% url "courses:assignments:assignment" course.id week.number assignment.id %}" class="list-group-item">
+                                <a href="{% url "courses:assignments:assignment" course.id week.number assignment.number %}" class="list-group-item">
                                     <span class="badge">{{ assignment.mark }}</span>
                                     {{ assignment.title }}
                                 </a>
