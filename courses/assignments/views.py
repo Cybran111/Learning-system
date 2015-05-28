@@ -17,14 +17,14 @@ from courses.models import Week
 
 @login_required
 def assignments_view(request, course_id):
-
     weeks = Week.objects.filter(course=course_id)
     return render(request, "courses/assignments/assignments.html", {'weeks': weeks})
 
 
 @login_required
 def assignment_view(request, course_id, week_id, assignment_id):
-    assignment = Assignment.objects.get(course=course_id, week=week_id, number=assignment_id)
+    assignment = Assignment.objects.get(course=course_id, week=Week.objects.get(course=course_id, number=week_id),
+                                        number=assignment_id)
     feedbacks = Feedback.objects.filter(student=request.user, assignment=assignment)
 
     if request.method == 'GET':

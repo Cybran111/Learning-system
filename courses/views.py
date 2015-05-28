@@ -22,10 +22,6 @@ def course_dashboard_view(request, course_id):
 
 @login_required
 def news_view(request, course_id):
-    # News.objects.create(title=course_id,
-    #                     text="some text",
-    #                     course=Course.objects.get(pk=course_id)
-    #                     )
     feed = News.objects.filter(course=course_id).order_by("date_created")
     return render(request, 'courses/news.html', {"feed": feed})
 

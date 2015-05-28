@@ -93,12 +93,4 @@ def assessment_feedback(request, course_id, week_id, assessment_id, feedback_id)
             } for question in questionset.question_set.all())
         )
     }
-
-    # for question in feedback["questions"]:
-    #     for answer in question["answers"]:
-    #         print answer["text"], bool(answer["is_chosen"])
-    #         print answer["is_correct"]
-    #         print answer["is_chosen"]
-
-    # return render(request, "courses/assessments/feedback.html", {"feedback": answerset, "questionset": questionset})
     return render(request, "courses/assessments/feedback.html", {"feedback": feedback})
