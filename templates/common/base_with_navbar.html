@@ -1,7 +1,12 @@
 {% extends "common/base.html" %}
 
 {#FIXME: views not always provide the course (for title)#}
-{% block title %} {{ course.title }} - Система дистанційного навчання {% endblock %}
+{% block title %}
+    {% if course.title %}
+    {{ course.title }} -
+    {% endif %}
+    Система дистанційного навчання
+{% endblock %}
 
 {% block navbar %}
 {% include "common/navbar.html" %}
