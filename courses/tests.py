@@ -37,23 +37,23 @@ class SaveCourseTest(TestCase):
         self.course_data = {'title': 'My course', 'short_desc': 'A tiny course', 'full_desc': "A REALLY tiny course"}
 
 
-class ModelsTest(TestCase):
-    def test_course_can_holds_weeks_and_lectures(self):
-        course = Course()
-        course.title = "A little title"
-        course.save()
-
-        week = Week()
-        week.course = course
-        week.number = 1
-        week.save()
-
-        lecture = Lecture()
-        lecture.title = "My lecture"
-        lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
-        lecture.week = week
-        lecture.order_id = 1
-        lecture.save()
-
-        self.assertEqual(week, Week.objects.get(course=course))
-        self.assertEqual(lecture, Lecture.objects.get(week=week))
+# class ModelsTest(TestCase):
+#     def test_course_can_holds_weeks_and_lectures(self):
+#         course = Course()
+#         course.title = "A little title"
+#         course.save()
+#
+#         week = Week()
+#         week.course = course
+#         week.number = 1
+#         week.save()
+#
+#         lecture = Lecture()
+#         lecture.title = "My lecture"
+#         lecture.video_url = "https://www.youtube.com/watch?v=lXn7XKLA6Vg"
+#         lecture.week = week
+#         lecture.order_id = 1
+#         lecture.save()
+#
+#         self.assertEqual(week, Week.objects.get(course=course))
+#         self.assertEqual(lecture, Lecture.objects.get(week=week))
