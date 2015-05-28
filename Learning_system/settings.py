@@ -31,8 +31,8 @@ else:
     SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DJANGO_PROD' not in os.environ
-# DEBUG = True
+# DEBUG = 'DJANGO_PROD' not in os.environ
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
