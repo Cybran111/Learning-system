@@ -25,7 +25,7 @@
     <div class="list-group">
         {% for course in courses %}
             <a href="{% url "courses:course_overview" course.id %}" class="list-group-item">
-                <img src="{% cloudinary "course.img" width=50 height=50 crop="fill" %}" class="img-rounded" height="50" width="50">
+                {% cloudinary course.img width=50 height=50 crop="fill" %}
                 <h4>{{ course.title }}</h4>
                 <h5>{{ course.short_description }}</h5>
             </a>
