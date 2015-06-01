@@ -48,10 +48,10 @@ def assessment_attempt(request, course_id, week_id, assessment_id):
 
                 if (possible_answer.is_correct and question_answer_id in request.POST.getlist("answers")) or \
                         (not possible_answer.is_correct and question_answer_id not in request.POST.getlist("answers")):
-                    mark += question.value / question.possibleanswer_set.all().count()
+                    mark += float(question.value) / question.possibleanswer_set.all().count()
 
         answer_set = StudentAnswerSet.objects.create(user=request.user, questionset=questionset,
-                                                     mark=mark, is_finished=True,
+                                                     mark=int(mark), is_finished=True,
                                                      number=StudentAnswerSet.objects.filter(
                                                          user=request.user,
                                                          questionset=questionset).count()+1
